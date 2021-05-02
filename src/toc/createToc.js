@@ -77,7 +77,7 @@ export function createToc(options = {}) {
           'utf8',
         );
         console.log({ currentFolder, dataDir });
-        writeFileSync(join(dataDir, subfolder, 'abc.json'), 'ABC', 'utf8');
+        writeFileSync(join(dataDir, 'abc.json'), 'ABC', 'utf8');
 
         processExerciseFolder(basename, join(folder, subfolder), toc);
       } else {
