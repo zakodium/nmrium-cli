@@ -31,6 +31,8 @@ export function createToc(options = {}) {
     }
   }
 
+  debug(`Save: ${join(dataDir, 'toc.json')}`);
+
   writeFileSync(
     join(dataDir, 'toc.json'),
     JSON.stringify(toc, undefined, 2),
