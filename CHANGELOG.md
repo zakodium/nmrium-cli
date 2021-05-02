@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.0.1...v0.1.0) (2021-05-02)
+
+
+### Features
+
+* add more debug information ([a822a54](https://www.github.com/zakodium/nmrium-cli/commit/a822a5445dcbf3eb8cbb594135ca29940ff35b4a))
+
 ### 0.0.1 (2021-05-02)
 
 
