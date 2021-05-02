@@ -1,9 +1,12 @@
 import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+import Debug from 'debug';
 import md5 from 'md5';
 import { Molecule } from 'openchemlib';
 import { v4 } from 'uuid';
+
+const debug = Debug('Process exercise folder');
 
 const URL_FOLDER = '.';
 let exercise = 0;
@@ -35,11 +38,11 @@ export function processExerciseFolder(basename, folder, toc) {
       },
     });
   }
-  writeFileSync(
-    join(basename, folder, 'index.json'),
-    JSON.stringify({ spectra }, undefined, 2),
-    'utf8',
-  );
+
+  const targetPath = join(basename, folder, 'index.json');
+  debug(`Create: ${targetPath}`);
+
+  writeFileSync(targetPath, JSON.stringify({ spectra }, undefined, 2), 'utf8');
 
   let title = folder.replace(/^[^/]*\//, '').replace(/^[0-9]*_/, '');
   if (title.match(/^[0-9]{2,10}-[0-9]{2}-[0-9]$/)) {
