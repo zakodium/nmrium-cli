@@ -44,8 +44,6 @@ export function processExerciseFolder(basename, folder, toc) {
 
   writeFileSync(targetPath, JSON.stringify({ spectra }, undefined, 2), 'utf8');
 
-  writeFileSync(join(basename, 'abc.json'), 'ABC', 'utf8');
-
   debug(lstatSync(targetPath));
 
   let title = folder.replace(/^[^/]*\//, '').replace(/^[0-9]*_/, '');
