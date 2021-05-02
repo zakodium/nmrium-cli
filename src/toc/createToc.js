@@ -4,10 +4,12 @@ import {
   readFileSync,
   readdirSync,
   writeFileSync,
+  unlinkSync,
 } from 'fs';
 import { join } from 'path';
 
 import Debug from 'debug';
+import dir from 'fs-readdir-recursive';
 import YAML from 'yaml';
 
 import { processExerciseFolder } from './processExerciseFolder';
@@ -18,12 +20,19 @@ const DATA_FOLDER = '.';
 
 export function createToc(options = {}) {
   const { homeDir } = options;
-  const DATA_DIR = join(homeDir, DATA_FOLDER);
+  const dataDir = join(homeDir, DATA_FOLDER);
   let toc = [];
-  processFolder(join(homeDir, DATA_FOLDER), '.', toc);
+  processFolder(dataDir, '.', toc);
+
+  if (options.c) {
+    const files = dir(dataDir).filter((file) => file.endsWith('.json'));
+    for (let file of files) {
+      unlinkSync(file);
+    }
+  }
 
   writeFileSync(
-    join(DATA_DIR, 'toc.json'),
+    join(dataDir, 'toc.json'),
     JSON.stringify(toc, undefined, 2),
     'utf8',
   );
@@ -34,7 +43,7 @@ export function createToc(options = {}) {
     const subToc = JSON.parse(JSON.stringify(item.children));
     subToc[0].selected = true;
     writeFileSync(
-      join(DATA_DIR, `toc_${item.folderName}.json`),
+      join(dataDir, `toc_${item.folderName}.json`),
       JSON.stringify([subToc], undefined, 2),
       'utf8',
     );
