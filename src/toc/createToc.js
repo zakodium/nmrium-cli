@@ -63,6 +63,8 @@ export function createToc(options = {}) {
     );
     for (let subfolder of folders) {
       if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
+        console.log('WRITE');
+        console.log(join(currentFolder, subfolder, 'abc.json'));
         writeFileSync(
           join(currentFolder, subfolder, 'abc.json'),
           'ABC',
