@@ -18,6 +18,12 @@ const debug = Debug('Create toc');
 
 const DATA_FOLDER = '.';
 
+/**
+ * We process a folder that contains a structure
+ * @param {string} basename
+ * @param {string} folder
+ * @param {object} toc
+ */
 export function createToc(options = {}) {
   const { homeDir } = options;
   const dataDir = join(homeDir, DATA_FOLDER);
@@ -70,6 +76,8 @@ export function createToc(options = {}) {
           'ABC',
           'utf8',
         );
+        console.log({ currentFolder, dataDir });
+        writeFileSync(join(dataDir, subfolder, 'abc.json'), 'ABC', 'utf8');
 
         processExerciseFolder(basename, join(folder, subfolder), toc);
       } else {
@@ -92,11 +100,4 @@ export function createToc(options = {}) {
       }
     }
   }
-
-  /**
-   * We process a folder that contains a structure
-   * @param {string} basename
-   * @param {string} folder
-   * @param {object} toc
-   */
 }
