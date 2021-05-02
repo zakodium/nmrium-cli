@@ -56,48 +56,37 @@ export function createToc(options = {}) {
       'utf8',
     );
   }
+}
 
-  function processFolder(basename, folder, toc) {
-    debug('Processing folder: ', basename, folder);
-    const currentFolder = join(basename, folder);
-    const entries = readdirSync(currentFolder);
+function processFolder(basename, folder, toc) {
+  debug('Processing folder: ', basename, folder);
+  const currentFolder = join(basename, folder);
+  const entries = readdirSync(currentFolder);
 
-    const folders = entries.filter(
-      (file) =>
-        !file.startsWith('.') &&
-        lstatSync(join(currentFolder, file)).isDirectory(),
-    );
-    for (let subfolder of folders) {
-      if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
-        console.log('WRITE');
-        console.log(join(currentFolder, subfolder, 'abc.json'));
-        writeFileSync(
-          join(currentFolder, subfolder, 'abc.json'),
-          'ABC',
-          'utf8',
-        );
-        console.log({ currentFolder, dataDir });
-        writeFileSync(join(dataDir, 'abc.json'), 'ABC', 'utf8');
+  const folders = entries.filter(
+    (file) =>
+      !file.startsWith('.') &&
+      lstatSync(join(currentFolder, file)).isDirectory(),
+  );
+  for (let subfolder of folders) {
+    if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
+      console.log('WRITE');
+      console.log(join(currentFolder, subfolder, 'abc.json'));
+      writeFileSync(join(currentFolder, subfolder, 'abc.json'), 'ABC', 'utf8');
 
-        processExerciseFolder(basename, join(folder, subfolder), toc);
-      } else {
-        const folderConfigFilename = join(
-          currentFolder,
-          subfolder,
-          'index.yml',
-        );
-        const folderConfig = existsSync(folderConfigFilename)
-          ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
-          : {};
-        const subtoc = {
-          groupName:
-            folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
-          folderName: subfolder,
-          children: [],
-        };
-        toc.push(subtoc);
-        processFolder(basename, join(folder, subfolder), subtoc.children);
-      }
+      processExerciseFolder(basename, join(folder, subfolder), toc);
+    } else {
+      const folderConfigFilename = join(currentFolder, subfolder, 'index.yml');
+      const folderConfig = existsSync(folderConfigFilename)
+        ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
+        : {};
+      const subtoc = {
+        groupName: folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
+        folderName: subfolder,
+        children: [],
+      };
+      toc.push(subtoc);
+      processFolder(basename, join(folder, subfolder), subtoc.children);
     }
   }
 }
