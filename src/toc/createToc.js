@@ -28,13 +28,6 @@ export function createToc(options = {}) {
   const { homeDir } = options;
   const dataDir = join(homeDir, DATA_FOLDER);
 
-  console.log('writeABC');
-  writeFileSync(join(dataDir, 'abc.json'), 'ABC', 'utf8');
-  writeDEF(dataDir);
-
-  let toc = [];
-  processFolder(dataDir, '.', toc);
-
   if (options.c) {
     const files = dir(dataDir).filter((file) => file.endsWith('.json'));
     for (let file of files) {
@@ -42,9 +35,12 @@ export function createToc(options = {}) {
     }
   }
 
+  let toc = [];
+  processFolder(dataDir, '.', toc);
+
   debug(`Save: ${join(dataDir, 'toc.json')}`);
   writeFileSync(
-    join(dataDir, 'abc.json'),
+    join(dataDir, 'xyz.json'),
     JSON.stringify(toc, undefined, 2),
     'utf8',
   );
@@ -65,11 +61,6 @@ export function createToc(options = {}) {
       'utf8',
     );
   }
-}
-
-function writeDEF(dataDir) {
-  console.log('writeDEF');
-  writeFileSync(join(dataDir, 'def.json'), 'DEF', 'utf8');
 }
 
 function processFolder(basename, folder, toc) {
