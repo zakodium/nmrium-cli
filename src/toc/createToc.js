@@ -43,12 +43,13 @@ export function createToc(options = {}) {
   }
 
   debug(`Save: ${join(dataDir, 'toc.json')}`);
-
+  /*
   writeFileSync(
     join(dataDir, 'toc.json'),
     JSON.stringify(toc, undefined, 2),
     'utf8',
   );
+  */
   for (let item of toc) {
     if (!item.folderName || !item.children || item.children.length < 1) {
       continue;
