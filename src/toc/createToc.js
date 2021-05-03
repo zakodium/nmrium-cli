@@ -18,11 +18,15 @@ const debug = Debug('Create toc');
 
 const DATA_FOLDER = '.';
 
+/**
+ * We process a folder that contains a structure
+ * @param {string} basename
+ * @param {string} folder
+ * @param {object} toc
+ */
 export function createToc(options = {}) {
   const { homeDir } = options;
   const dataDir = join(homeDir, DATA_FOLDER);
-  let toc = [];
-  processFolder(dataDir, '.', toc);
 
   if (options.c) {
     const files = dir(dataDir).filter((file) => file.endsWith('.json'));
@@ -30,6 +34,11 @@ export function createToc(options = {}) {
       unlinkSync(file);
     }
   }
+
+  let toc = [];
+  processFolder(dataDir, '.', toc);
+
+  debug(`Save: ${join(dataDir, 'toc.json')}`);
 
   writeFileSync(
     join(dataDir, 'toc.json'),
@@ -48,45 +57,33 @@ export function createToc(options = {}) {
       'utf8',
     );
   }
+}
 
-  function processFolder(basename, folder, toc) {
-    debug('Processing folder: ', basename, folder);
-    const currentFolder = join(basename, folder);
-    const entries = readdirSync(currentFolder);
+function processFolder(basename, folder, toc) {
+  debug('Processing folder: ', basename, folder);
+  const currentFolder = join(basename, folder);
+  const entries = readdirSync(currentFolder);
 
-    const folders = entries.filter(
-      (file) =>
-        !file.startsWith('.') &&
-        lstatSync(join(currentFolder, file)).isDirectory(),
-    );
-    for (let subfolder of folders) {
-      if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
-        processExerciseFolder(basename, join(folder, subfolder), toc);
-      } else {
-        const folderConfigFilename = join(
-          currentFolder,
-          subfolder,
-          'index.yml',
-        );
-        const folderConfig = existsSync(folderConfigFilename)
-          ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
-          : {};
-        const subtoc = {
-          groupName:
-            folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
-          folderName: subfolder,
-          children: [],
-        };
-        toc.push(subtoc);
-        processFolder(basename, join(folder, subfolder), subtoc.children);
-      }
+  const folders = entries.filter(
+    (file) =>
+      !file.startsWith('.') &&
+      lstatSync(join(currentFolder, file)).isDirectory(),
+  );
+  for (let subfolder of folders) {
+    if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
+      processExerciseFolder(basename, join(folder, subfolder), toc);
+    } else {
+      const folderConfigFilename = join(currentFolder, subfolder, 'index.yml');
+      const folderConfig = existsSync(folderConfigFilename)
+        ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
+        : {};
+      const subtoc = {
+        groupName: folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
+        folderName: subfolder,
+        children: [],
+      };
+      toc.push(subtoc);
+      processFolder(basename, join(folder, subfolder), subtoc.children);
     }
   }
-
-  /**
-   * We process a folder that contains a structure
-   * @param {string} basename
-   * @param {string} folder
-   * @param {object} toc
-   */
 }
