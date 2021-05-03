@@ -75,10 +75,6 @@ function processFolder(basename, folder, toc) {
   );
   for (let subfolder of folders) {
     if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
-      console.log('WRITE');
-      console.log(join(currentFolder, subfolder, 'abc.json'));
-      writeFileSync(join(currentFolder, subfolder, 'abc.json'), 'ABC', 'utf8');
-
       processExerciseFolder(basename, join(folder, subfolder), toc);
     } else {
       const folderConfigFilename = join(currentFolder, subfolder, 'index.yml');
