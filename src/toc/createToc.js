@@ -28,6 +28,7 @@ export function createToc(options = {}) {
   const { homeDir } = options;
   const dataDir = join(homeDir, DATA_FOLDER);
 
+  console.log('writeABC');
   writeFileSync(join(dataDir, 'abc.json'), 'ABC', 'utf8');
   writeDEF(dataDir);
 
@@ -63,6 +64,7 @@ export function createToc(options = {}) {
 }
 
 function writeDEF(dataDir) {
+  console.log('writeDEF');
   writeFileSync(join(dataDir, 'def.json'), 'DEF', 'utf8');
 }
 
