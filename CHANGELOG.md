@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.1.1...v0.2.0) (2021-05-03)
+
+
+### Features
+
+* **toc:** add option nostructure to remove structure.mol ([5adefac](https://www.github.com/zakodium/nmrium-cli/commit/5adefac3c9298ad16542e71dc22a07c1b662104f))
+
 ### [0.1.1](https://www.github.com/zakodium/nmrium-cli/compare/v0.1.0...v0.1.1) (2021-05-03)
 
 
