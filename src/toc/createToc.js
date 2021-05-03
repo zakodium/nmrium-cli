@@ -38,6 +38,13 @@ export function createToc(options = {}) {
   let toc = [];
   processFolder(dataDir, '.', toc);
 
+  if (options.nostructure) {
+    const files = dir(dataDir).filter((file) => file.endsWith('structure.mol'));
+    for (let file of files) {
+      unlinkSync(file);
+    }
+  }
+
   debug(`Save: ${join(dataDir, 'toc.json')}`);
 
   writeFileSync(

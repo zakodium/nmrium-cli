@@ -20,4 +20,8 @@ yargs(hideBin(process.argv))
     type: 'boolean',
     description: 'Remove all .json files',
   })
+  .option('nostructure', {
+    type: 'boolean',
+    description: 'Remove all structure.mol files',
+  })
   .demandCommand().argv;
