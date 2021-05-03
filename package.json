@@ -1,6 +1,6 @@
 {
   "name": "nmrium-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI commands related to nmrium",
   "main": "lib/index.js",
   "module": "src/index.js",
