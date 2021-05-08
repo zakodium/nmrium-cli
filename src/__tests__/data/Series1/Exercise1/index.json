@@ -1,0 +1,12 @@
+{
+  "spectra": [
+    {
+      "source": {
+        "jcampURL": "./src/__tests__/data/Series1/Exercise1/1h.jdx"
+      },
+      "display": {
+        "name": ""
+      }
+    }
+  ]
+}
