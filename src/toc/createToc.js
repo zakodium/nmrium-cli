@@ -13,22 +13,18 @@ import dir from 'fs-readdir-recursive';
 import YAML from 'yaml';
 
 import { processExerciseFolder } from './processExerciseFolder';
+import writeTocs from './utils/writeTocs';
 
 const debug = Debug('Create toc');
 
-const DATA_FOLDER = '.';
-
 /**
- * We process a folder that contains a structure
- * @param {string} basename
- * @param {string} folder
+ * Create toc.json for the full project
+ * @param {string} dataDir
+ * @param {options} folder
  * @param {object} toc
  */
-export function createToc(options = {}) {
-  const { homeDir } = options;
-  const dataDir = join(homeDir, DATA_FOLDER);
-
-  if (options.c) {
+export function createToc(dataDir, options = {}) {
+  if (options.clean) {
     const files = dir(dataDir).filter((file) => file.endsWith('.json'));
     for (let file of files) {
       unlinkSync(file);
@@ -46,24 +42,7 @@ export function createToc(options = {}) {
   }
 
   debug(`Save: ${join(dataDir, 'toc.json')}`);
-
-  writeFileSync(
-    join(dataDir, 'toc.json'),
-    JSON.stringify(toc, undefined, 2),
-    'utf8',
-  );
-  for (let item of toc) {
-    if (!item.folderName || !item.children || item.children.length < 1) {
-      continue;
-    }
-    const subToc = JSON.parse(JSON.stringify(item.children));
-    subToc[0].selected = true;
-    writeFileSync(
-      join(dataDir, `toc_${item.folderName}.json`),
-      JSON.stringify([subToc], undefined, 2),
-      'utf8',
-    );
-  }
+  writeTocs(dataDir, toc);
 }
 
 function processFolder(basename, folder, toc) {
