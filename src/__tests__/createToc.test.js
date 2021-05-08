@@ -1,6 +1,7 @@
-import command from '../command';
+import { join } from 'path';
 
-test('test createToc', () => {
-  // process.argv = ['', __dirname, 'toc'];
-  command();
+import { createToc } from '../toc/createToc';
+
+test('createToc', () => {
+  createToc(__dirname, { dataDir: join(__dirname, 'data') });
 });

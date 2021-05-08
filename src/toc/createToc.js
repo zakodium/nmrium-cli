@@ -3,7 +3,6 @@ import {
   existsSync,
   readFileSync,
   readdirSync,
-  writeFileSync,
   unlinkSync,
 } from 'fs';
 import { join } from 'path';
@@ -19,27 +18,16 @@ const debug = Debug('Create toc');
 
 /**
  * Create toc.json for the full project
- * @param {string} dataDir
- * @param {options} folder
- * @param {object} toc
+ * @param {string} commandDir
+ * @param {object} [options={}]
+ * @param {boolean} [options.clean] Remove all the json files from the data directory
+ * @param {boolean} [options.nostructure] Remove the structure from the result
  */
-export function createToc(dataDir, options = {}) {
-  if (options.clean) {
-    const files = dir(dataDir).filter((file) => file.endsWith('.json'));
-    for (let file of files) {
-      unlinkSync(file);
-    }
-  }
+export function createToc(commandDir, options = {}) {
+  const { noStructure, dataDir = commandDir } = options;
 
   let toc = [];
   processFolder(dataDir, '.', toc);
-
-  if (options.nostructure) {
-    const files = dir(dataDir).filter((file) => file.endsWith('structure.mol'));
-    for (let file of files) {
-      unlinkSync(file);
-    }
-  }
 
   debug(`Save: ${join(dataDir, 'toc.json')}`);
   writeTocs(dataDir, toc);
