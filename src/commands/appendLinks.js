@@ -49,7 +49,7 @@ export async function appendLinks(commandDir, options = {}) {
     }
   }
 
-  readme = readme.replace('<!-- LINKS -->', links.join('\n'));
+  readme = readme.replace('<-- LINKS -->', links.join('\n'));
 
   writeFileSync(join(dataDir, 'README.md'), readme, 'utf8');
 }
