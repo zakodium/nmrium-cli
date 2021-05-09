@@ -15,13 +15,14 @@ CLI commands related to nmrium.
 
 It will add a new command on your computer called `nmrium`.
 
-Currently this command allows to create the `json` file required to create on-line exercises.
-
 ### Create toc.json for online exercises
 
 ```bash
 cd __folder__with__exercises__
+nmrium deleteJSONs
 nmrium toc
+nmrium deleteStructures
+nmrium appendLinks
 ```
 
 ## License

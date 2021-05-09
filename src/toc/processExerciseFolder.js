@@ -2,16 +2,16 @@ import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 import Debug from 'debug';
+import { hashElement } from 'folder-hash';
 import md5 from 'md5';
 import { Molecule } from 'openchemlib';
-import { v4 } from 'uuid';
 
-const debug = Debug('Process exercise folder');
+const debug = Debug('nmrium.exercise');
 
 const URL_FOLDER = '.';
 let exercise = 0;
 
-export function processExerciseFolder(basename, folder, toc) {
+export async function processExerciseFolder(basename, folder, toc) {
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder);
   const spectra = [];
@@ -20,7 +20,14 @@ export function processExerciseFolder(basename, folder, toc) {
   // const molecules = [{ molfile }];
 
   const molecule = Molecule.fromMolfile(molfile);
-  const uuid = v4();
+
+  const uuid = (
+    await hashElement(currentFolder, {
+      folders: { exclude: ['*'] },
+      files: { exclude: ['*.json'] },
+    })
+  ).hash;
+
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
@@ -57,6 +64,5 @@ export function processExerciseFolder(basename, folder, toc) {
     title,
     selected: exercise === 1 || undefined,
   };
-
   toc.push(tocEntry);
 }
