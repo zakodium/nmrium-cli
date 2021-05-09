@@ -1,20 +1,13 @@
-import {
-  lstatSync,
-  existsSync,
-  readFileSync,
-  readdirSync,
-  unlinkSync,
-} from 'fs';
+import { lstatSync, existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 import Debug from 'debug';
-import dir from 'fs-readdir-recursive';
 import YAML from 'yaml';
 
 import { processExerciseFolder } from './processExerciseFolder';
 import writeTocs from './utils/writeTocs';
 
-const debug = Debug('Create toc');
+const debug = Debug('nmrium.toc');
 
 /**
  * Create toc.json for the full project
@@ -23,17 +16,17 @@ const debug = Debug('Create toc');
  * @param {boolean} [options.clean] Remove all the json files from the data directory
  * @param {boolean} [options.nostructure] Remove the structure from the result
  */
-export function createToc(commandDir, options = {}) {
-  const { noStructure, dataDir = commandDir } = options;
+export async function createToc(commandDir, options = {}) {
+  const { dataDir = commandDir } = options;
 
   let toc = [];
-  processFolder(dataDir, '.', toc);
+  await processFolder(dataDir, '.', toc);
 
   debug(`Save: ${join(dataDir, 'toc.json')}`);
   writeTocs(dataDir, toc);
 }
 
-function processFolder(basename, folder, toc) {
+async function processFolder(basename, folder, toc) {
   debug('Processing folder: ', basename, folder);
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder);
@@ -45,7 +38,7 @@ function processFolder(basename, folder, toc) {
   );
   for (let subfolder of folders) {
     if (existsSync(join(currentFolder, subfolder, 'structure.mol'))) {
-      processExerciseFolder(basename, join(folder, subfolder), toc);
+      await processExerciseFolder(basename, join(folder, subfolder), toc);
     } else {
       const folderConfigFilename = join(currentFolder, subfolder, 'index.yml');
       const folderConfig = existsSync(folderConfigFilename)

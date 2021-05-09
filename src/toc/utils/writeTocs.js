@@ -15,7 +15,7 @@ export default function writeTocs(dataDir, toc) {
     subToc[0].selected = true;
     writeFileSync(
       join(dataDir, `toc_${item.folderName}.json`),
-      JSON.stringify([subToc], undefined, 2),
+      JSON.stringify(subToc, undefined, 2),
       'utf8',
     );
   }

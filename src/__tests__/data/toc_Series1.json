@@ -1,19 +1,9 @@
 [
-  [
-    {
-      "uuid": "76453e31-370d-4962-9e28-46f9027cd38e",
-      "mf": "",
-      "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
-      "file": "./Series1/Exercise1/index.json",
-      "title": "Exercise1",
-      "selected": true
-    },
-    {
-      "uuid": "efc7d47d-84ae-47c5-a991-faa47cb94c46",
-      "mf": "",
-      "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
-      "file": "./Series1/Exercise2/index.json",
-      "title": "Exercise2"
-    }
-  ]
+  {
+    "mf": "",
+    "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+    "file": "./Series1/Exercise1/index.json",
+    "title": "Exercise1",
+    "selected": true
+  }
 ]

@@ -2,9 +2,10 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
+import { appendLinks } from './commands/appendLinks';
+import { deleteJSONs } from './commands/deleteJSONs';
+import { deleteStructures } from './commands/deleteStructures';
 import { createToc } from './toc/createToc';
-import { deleteJson } from './toc/deleteJson';
-import { deleteStructure } from './toc/deleteStructure';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
@@ -19,19 +20,34 @@ yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: 'removeJSONs [options]',
+    command: 'deleteJSONs [options]',
     desc: 'Remove all .json files',
     builder: (yargs) => yargs,
     handler: (argv) => {
-      deleteJson(homeDir, { ...argv });
+      deleteJSONs(homeDir, { ...argv });
     },
   })
   .command({
-    command: 'removeStructures [options]',
+    command: 'deleteStructures [options]',
     desc: 'Remove all .json files',
     builder: (yargs) => yargs,
     handler: (argv) => {
-      deleteStructure(homeDir, { ...argv });
+      deleteStructures(homeDir, { ...argv });
+    },
+  })
+  .command({
+    command: 'appendLinks [options]',
+    aliases: [],
+    desc: 'Replace <-- LINKS --> placeholder from README.md file',
+    builder: (yargs) => {
+      yargs.option('baseURL', {
+        alias: 'b',
+        type: 'string',
+        description: 'Base URL to which to append JSON url',
+      });
+    },
+    handler: (argv) => {
+      appendLinks(homeDir, { ...argv });
     },
   })
   .option('dataDir', {
@@ -39,5 +55,4 @@ yargs(hideBin(process.argv))
     type: 'string',
     description: 'Home directory containing the data',
   })
-
   .demandCommand().argv;

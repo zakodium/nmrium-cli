@@ -11,7 +11,7 @@
   "scripts": {
     "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepublishOnly": "rollup -c",
+    "prepack": "rollup -c",
     "test": "npm run test-coverage && npm run eslint",
     "test-coverage": "jest --coverage",
     "test-only": "jest"
@@ -58,6 +58,8 @@
     "debug": "^4.3.1",
     "folder-hash": "^4.0.1",
     "fs-readdir-recursive": "^1.1.0",
+    "git-remote-origin-url": "^3.1.0",
+    "git-url-parse": "^11.4.4",
     "md5": "^2.3.0",
     "openchemlib": "^7.4.0",
     "uuid": "^8.3.2",

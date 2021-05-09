@@ -1,7 +1,20 @@
 [
   {
+    "mf": "",
+    "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+    "file": "./Exercises3/index.json",
+    "title": "Exercises3"
+  },
+  {
     "groupName": "Series1",
     "folderName": "Series1",
-    "children": []
+    "children": [
+      {
+        "mf": "",
+        "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+        "file": "./Series1/Exercise1/index.json",
+        "title": "Exercise1"
+      }
+    ]
   }
 ]

@@ -6,7 +6,7 @@ import { hashElement } from 'folder-hash';
 import md5 from 'md5';
 import { Molecule } from 'openchemlib';
 
-const debug = Debug('Process exercise folder');
+const debug = Debug('nmrium.exercise');
 
 const URL_FOLDER = '.';
 let exercise = 0;
@@ -20,6 +20,7 @@ export async function processExerciseFolder(basename, folder, toc) {
   // const molecules = [{ molfile }];
 
   const molecule = Molecule.fromMolfile(molfile);
+
   const uuid = await hashElement(currentFolder, {
     folders: { exclude: ['*'] },
     files: { exclude: ['*.json'] },
@@ -60,6 +61,5 @@ export async function processExerciseFolder(basename, folder, toc) {
     title,
     selected: exercise === 1 || undefined,
   };
-
   toc.push(tocEntry);
 }
