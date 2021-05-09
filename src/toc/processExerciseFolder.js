@@ -21,10 +21,13 @@ export async function processExerciseFolder(basename, folder, toc) {
 
   const molecule = Molecule.fromMolfile(molfile);
 
-  const uuid = await hashElement(currentFolder, {
-    folders: { exclude: ['*'] },
-    files: { exclude: ['*.json'] },
-  }).hash;
+  const uuid = (
+    await hashElement(currentFolder, {
+      folders: { exclude: ['*'] },
+      files: { exclude: ['*.json'] },
+    })
+  ).hash;
+
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
