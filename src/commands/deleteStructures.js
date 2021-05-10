@@ -10,7 +10,9 @@ import dir from 'fs-readdir-recursive';
  */
 export function deleteStructures(commandDir, options = {}) {
   const { dataDir = commandDir } = options;
-  const files = dir(dataDir).filter((file) => file.endsWith('structure.mol'));
+  const files = dir(dataDir).filter((file) =>
+    file.toLowerCase().endsWith('.mol'),
+  );
   for (let file of files) {
     unlinkSync(file);
   }
