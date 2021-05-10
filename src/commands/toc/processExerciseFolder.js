@@ -14,9 +14,12 @@ let exercise = 0;
 export async function processExerciseFolder(basename, folder, toc) {
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder);
+  const molfileName = readdirSync(currentFolder).filter((file) =>
+    file.toLowerCase().endsWith('.mol'),
+  )[0];
   const spectra = [];
   // we process only the folder if there is an answer (structure.mol)
-  const molfile = readFileSync(join(currentFolder, 'structure.mol'), 'utf8');
+  const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
   // const molecules = [{ molfile }];
 
   const molecule = Molecule.fromMolfile(molfile);
@@ -31,7 +34,6 @@ export async function processExerciseFolder(basename, folder, toc) {
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
-
   for (let spectrum of entries.filter(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
@@ -51,9 +53,11 @@ export async function processExerciseFolder(basename, folder, toc) {
 
   writeFileSync(targetPath, JSON.stringify({ spectra }, undefined, 2), 'utf8');
 
-  let title = folder.replace(/^[^/]*\//, '').replace(/^[0-9]*_/, '');
-  if (title.match(/^[0-9]{2,10}-[0-9]{2}-[0-9]$/)) {
-    // a cas number, we will not give the answer to the students !
+  let title = folder
+    .replace(/^[^/]*\//, '')
+    .replace(/^[0-9]*$/, '')
+    .replace(/^[0-9]*_/, '');
+  if (!title) {
     title = `Exercise ${++exercise}`;
   }
   const tocEntry = {

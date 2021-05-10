@@ -1,0 +1,20 @@
+[
+  {
+    "groupName": "lcov-report",
+    "folderName": "lcov-report",
+    "children": [
+      {
+        "groupName": "toc",
+        "folderName": "toc",
+        "children": [
+          {
+            "groupName": "utils",
+            "folderName": "utils",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "selected": true
+  }
+]

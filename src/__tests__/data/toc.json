@@ -9,6 +9,21 @@
   {
     "groupName": "Series1",
     "folderName": "Series1",
-    "children": []
+    "children": [
+      {
+        "uuid": "lmF/JAbND8v7ijcQLbNaPmt0YLg=",
+        "mf": "",
+        "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+        "file": "./Series1/Exercise1/index.json",
+        "title": "Exercise1"
+      },
+      {
+        "uuid": "Xk5vTYzcBBCOCyFieVpAZZj9umM=",
+        "mf": "",
+        "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+        "file": "./Series1/Exercise2/index.json",
+        "title": "Exercise2"
+      }
+    ]
   }
 ]

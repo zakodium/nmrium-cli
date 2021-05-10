@@ -1,0 +1,99 @@
+[
+  {
+    "groupName": "bin",
+    "folderName": "bin",
+    "children": []
+  },
+  {
+    "groupName": "coverage",
+    "folderName": "coverage",
+    "children": [
+      {
+        "groupName": "lcov-report",
+        "folderName": "lcov-report",
+        "children": [
+          {
+            "groupName": "toc",
+            "folderName": "toc",
+            "children": [
+              {
+                "groupName": "utils",
+                "folderName": "utils",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "groupName": "lib",
+    "folderName": "lib",
+    "children": []
+  },
+  {
+    "groupName": "node_modules",
+    "folderName": "node_modules",
+    "children": [
+      {
+        "groupName": "@babel",
+        "folderName": "@babel",
+        "children": []
+      },
+      {
+        "groupName": "@eslint",
+        "folderName": "@eslint",
+        "children": []
+      },
+      {
+        "groupName": "@jest",
+        "folderName": "@jest",
+        "children": []
+      },
+      {
+        "groupName": "@types",
+        "folderName": "@types",
+        "children": []
+      },
+      {
+        "groupName": "@typescript-eslint",
+        "folderName": "@typescript-eslint",
+        "children": []
+      }
+    ]
+  },
+  {
+    "groupName": "src",
+    "folderName": "src",
+    "children": [
+      {
+        "groupName": "_tests__",
+        "folderName": "__tests__",
+        "children": [
+          {
+            "groupName": "data",
+            "folderName": "data",
+            "children": []
+          }
+        ]
+      },
+      {
+        "groupName": "commands",
+        "folderName": "commands",
+        "children": []
+      },
+      {
+        "groupName": "toc",
+        "folderName": "toc",
+        "children": [
+          {
+            "groupName": "utils",
+            "folderName": "utils",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
