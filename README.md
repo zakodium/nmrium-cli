@@ -20,7 +20,7 @@ It will add a new command on your computer called `nmrium`.
 ```bash
 cd __folder__with__exercises__
 nmrium deleteJSONs
-nmrium toc
+nmrium createExercisesTOC
 nmrium deleteStructures
 nmrium appendLinks
 ```
