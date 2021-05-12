@@ -8,5 +8,5 @@ import { processExerciseFolder } from './toc/processExerciseFolder';
  * @param {boolean} [options.dataDir]
  */
 export async function createExercisesTOC(commandDir, options = {}) {
-  createToc(commandDir, processExerciseFolder, options);
+  return createToc(commandDir, processExerciseFolder, options);
 }

@@ -20,17 +20,14 @@ export async function processExerciseFolder(basename, folder, toc) {
   const spectra = [];
   // we process only the folder if there is an answer (structure.mol)
   const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
-  // const molecules = [{ molfile }];
-
   const molecule = Molecule.fromMolfile(molfile);
 
-  const uuid = (
+  const id = (
     await hashElement(currentFolder, {
       folders: { exclude: ['*'] },
       files: { exclude: ['*.json'] },
     })
   ).hash;
-
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
@@ -61,7 +58,7 @@ export async function processExerciseFolder(basename, folder, toc) {
     title = `Exercise ${++exercise}`;
   }
   const tocEntry = {
-    uuid,
+    id,
     mf,
     idCodeHash,
     file: `${URL_FOLDER}/${folder}/index.json`,
