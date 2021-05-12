@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.3.0...v0.4.0) (2021-05-12)
+
+
+### Features
+
+* add function createExercisesTOC ([4c69e06](https://www.github.com/zakodium/nmrium-cli/commit/4c69e06e551522a42c95f55e96458351f479f56e))
+
 ## [0.3.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.2.0...v0.3.0) (2021-05-09)
 
 
