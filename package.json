@@ -62,7 +62,8 @@
     "git-url-parse": "^11.4.4",
     "md5": "^2.3.0",
     "openchemlib": "^7.4.0",
-    "uuid": "^8.3.2",
+    "recursive-iterator": "^3.3.0",
+    "traverse": "^0.6.6",
     "yaml": "^1.10.2",
     "yargs": "^16.2.0"
   }
