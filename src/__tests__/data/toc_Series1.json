@@ -1,9 +1,17 @@
 [
   {
-    "mf": "",
-    "idCodeHash": "0f739a84c3f1a52d73bb23f7872a85f3",
+    "id": "e51A2IQ4z3V1fUG6MQE4xjJ3rBI=",
+    "mf": "CH4O",
+    "idCodeHash": "ac7bc0517b9f957617ba6629d087bb28",
     "file": "./Series1/Exercise1/index.json",
     "title": "Exercise1",
     "selected": true
+  },
+  {
+    "id": "AHpOVZJi+ht0/+If6XRC5whmJ34=",
+    "mf": "CH4O",
+    "idCodeHash": "ac7bc0517b9f957617ba6629d087bb28",
+    "file": "./Series1/Exercise2/index.json",
+    "title": "Exercise2"
   }
 ]

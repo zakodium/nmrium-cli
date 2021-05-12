@@ -3,20 +3,20 @@ import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
 import { appendLinks } from './commands/appendLinks';
+import { createExercisesTOC } from './commands/createExercisesTOC';
 import { deleteJSONs } from './commands/deleteJSONs';
 import { deleteStructures } from './commands/deleteStructures';
-import { createToc } from './toc/createToc';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
   .scriptName('nmrium')
   .command({
-    command: 'toc [options]',
+    command: 'createExercisesTOC [options]',
     aliases: [],
-    desc: 'Build toc.json',
+    desc: 'Build toc.json for exercises',
     builder: (yargs) => yargs,
     handler: (argv) => {
-      createToc(homeDir, { ...argv });
+      createExercisesTOC(homeDir, { ...argv });
     },
   })
   .command({

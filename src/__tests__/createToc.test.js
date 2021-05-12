@@ -1,7 +1,7 @@
 import { join } from 'path';
 
-import { createToc } from '../toc/createToc';
+import { createExercisesTOC } from '../commands/createExercisesTOC';
 
-test('createToc', () => {
-  createToc(__dirname, { dataDir: join(__dirname, 'data') });
+test('createToc', async () => {
+  await createExercisesTOC(__dirname, { dataDir: join(__dirname, 'data') });
 });
