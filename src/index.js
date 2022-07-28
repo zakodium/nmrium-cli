@@ -6,7 +6,7 @@ import { appendLinks } from './commands/appendLinks';
 import { createExercisesTOC } from './commands/createExercisesTOC';
 import { deleteJSONs } from './commands/deleteJSONs';
 import { deleteStructures } from './commands/deleteStructures';
-import { createToc } from './commands/toc/createToc';
+import { createGeneralTOC } from './commands/createGeneralTOC';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
@@ -21,12 +21,12 @@ yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: 'createGenerallToc [options]',
+    command: 'createGeneralTOC [options]',
     aliases: [],
     desc: 'Build a general toc.json',
     builder: (yargs) => yargs,
     handler: (argv) => {
-      createToc(homeDir, { ...argv });
+      createGeneralTOC(homeDir, { ...argv });
     },
   })
   .command({
