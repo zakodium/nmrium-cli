@@ -25,6 +25,10 @@ nmrium deleteStructures
 nmrium appendLinks
 ```
 
+To quickly create a TOC for a folder:
+```bash
+nmrium createGeneralTOC
+```
 ## License
 
 [MIT](./LICENSE)
