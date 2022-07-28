@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
 import { appendLinks } from './commands/appendLinks';
 import { createExercisesTOC } from './commands/createExercisesTOC';
+import { createGeneralTOC } from './commands/createGeneralTOC';
 import { deleteJSONs } from './commands/deleteJSONs';
 import { deleteStructures } from './commands/deleteStructures';
-import { createGeneralTOC } from './commands/createGeneralTOC';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))

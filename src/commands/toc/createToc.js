@@ -1,12 +1,12 @@
 import { lstatSync, existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-import Debug from 'debug';
+import debugFct from 'debug';
 import YAML from 'yaml';
 
 import writeTocs from './utils/writeTocs';
 
-const debug = Debug('nmrium.toc');
+const debug = debugFct('nmrium.toc');
 
 /**
  * Create toc.json for the full project

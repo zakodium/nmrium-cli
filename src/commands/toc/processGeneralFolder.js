@@ -1,10 +1,10 @@
 import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import Debug from 'debug';
+import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 
-const debug = Debug('nmrium.general');
+const debug = debugFct('nmrium.general');
 
 const URL_FOLDER = '.';
 let exercise = 0;

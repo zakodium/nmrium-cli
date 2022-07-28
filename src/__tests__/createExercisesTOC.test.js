@@ -1,5 +1,6 @@
-import { join } from 'path';
 import { statSync } from 'fs';
+import { join } from 'path';
+
 import readdir from 'recursive-readdir';
 
 import { createExercisesTOC } from '../commands/createExercisesTOC';

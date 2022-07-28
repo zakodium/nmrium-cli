@@ -1,6 +1,8 @@
-import { join } from 'path';
 import { statSync } from 'fs';
+import { join } from 'path';
+
 import readdir from 'recursive-readdir';
+
 import { createGeneralTOC } from '../commands/createGeneralTOC';
 
 const dataDir = join(__dirname, 'general');

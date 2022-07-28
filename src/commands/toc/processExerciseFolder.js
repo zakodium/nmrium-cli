@@ -1,12 +1,12 @@
 import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import Debug from 'debug';
+import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import md5 from 'md5';
 import { Molecule } from 'openchemlib';
 
-const debug = Debug('nmrium.exercise');
+const debug = debugFct('nmrium.exercise');
 
 const URL_FOLDER = '.';
 let exercise = 0;
