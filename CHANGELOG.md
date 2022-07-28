@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.4.0...v0.5.0) (2022-07-28)
+
+
+### Features
+
+* add createGeneralToc ([2b88b03](https://www.github.com/zakodium/nmrium-cli/commit/2b88b0363969910ec4087860d5d458001dc7c0bf))
+
 ## [0.4.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.3.0...v0.4.0) (2021-05-12)
 
 
