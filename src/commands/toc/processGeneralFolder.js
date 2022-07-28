@@ -3,10 +3,8 @@ import { join } from 'path';
 
 import Debug from 'debug';
 import { hashElement } from 'folder-hash';
-import md5 from 'md5';
-import { Molecule } from 'openchemlib';
 
-const debug = Debug('nmrium.exercise');
+const debug = Debug('nmrium.general');
 
 const URL_FOLDER = '.';
 let exercise = 0;
@@ -19,30 +17,26 @@ export async function processGeneralFolder(basename, folder, toc) {
   )[0];
   const spectra = [];
   // we process only the folder if there is an answer (structure.mol)
-  const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
-  const molecule = Molecule.fromMolfile(molfile);
-
   const id = (
     await hashElement(currentFolder, {
       folders: { exclude: ['*'] },
       files: { exclude: ['*.json'] },
     })
   ).hash;
-  const mf = molecule.getMolecularFormula().formula;
-  const idCode = molecule.getIDCode();
-  const idCodeHash = md5(idCode);
-  for (let spectrum of entries.filter(
+  for (let spectrumName of entries.filter(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
-    spectra.push({
+    const spectrum = {
       source: {
-        jcampURL: `./${folder}/${spectrum}`,
+        jcampURL: `./${folder}/${spectrumName}`,
       },
-      display: {
-        name: '',
-      },
-    });
+    };
+    if (molfileName) {
+      const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
+      spectrum.molecules = [{ molfile }];
+    }
+    spectra.push(spectrum);
   }
 
   const targetPath = join(basename, folder, 'index.json');
@@ -59,8 +53,6 @@ export async function processGeneralFolder(basename, folder, toc) {
   }
   const tocEntry = {
     id,
-    mf,
-    idCodeHash,
     file: `${URL_FOLDER}/${folder}/index.json`,
     title,
     selected: exercise === 1 || undefined,

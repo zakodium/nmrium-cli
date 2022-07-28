@@ -4,9 +4,11 @@
       "source": {
         "jcampURL": "./Series1/Exercise1/1h.jdx"
       },
-      "display": {
-        "name": ""
-      }
+      "molecules": [
+        {
+          "molfile": "\n  ChemDraw05122111372D\n\n  2  1  0  0  0  0  0  0  0  0999 V2000\n   -0.3572   -0.2062    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3572    0.2062    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0      \nM  END\n"
+        }
+      ]
     }
   ]
 }

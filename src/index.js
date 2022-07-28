@@ -21,7 +21,7 @@ yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: 'createFullToc [options]',
+    command: 'createGenerallToc [options]',
     aliases: [],
     desc: 'Build a general toc.json',
     builder: (yargs) => yargs,

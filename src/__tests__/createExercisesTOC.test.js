@@ -15,5 +15,5 @@ test('createExercisesTOC', async () => {
     .map((file) => {
       return statSync(file).size;
     });
-  expect(sizes).toStrictEqual([269, 156, 294, 736, 412]);
+  expect(sizes).toStrictEqual([279, 156, 294, 746, 412]);
 });

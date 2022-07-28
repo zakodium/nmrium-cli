@@ -14,5 +14,5 @@ test('createGeneralTOC', async () => {
     .map((file) => {
       return statSync(file).size;
     });
-  expect(sizes).toStrictEqual([269, 156, 294, 736, 412]);
+  expect(sizes).toStrictEqual([2115, 422, 826, 503, 268]);
 });
