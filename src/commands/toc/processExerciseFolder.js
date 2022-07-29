@@ -31,13 +31,13 @@ export async function processExerciseFolder(basename, folder, toc) {
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
-  for (let spectrum of entries.filter(
+  for (let spectrumName of entries.filter(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
     spectra.push({
       source: {
-        jcampURL: `./${folder}/${spectrum}`,
+        jcampURL: `./${spectrumName}`,
       },
       display: {
         name: '',

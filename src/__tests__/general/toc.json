@@ -6,18 +6,18 @@
     "selected": true
   },
   {
-    "groupName": "Series1",
-    "folderName": "Series1",
+    "groupName": "Group1",
+    "folderName": "Group1",
     "children": [
       {
-        "id": "e51A2IQ4z3V1fUG6MQE4xjJ3rBI=",
-        "file": "./Series1/Exercise1/index.json",
-        "title": "Exercise1"
+        "id": "9Z24PHIT7NFfniVoG7vF4aoHhfw=",
+        "file": "./Group1/Data1/index.json",
+        "title": "Data1"
       },
       {
-        "id": "AHpOVZJi+ht0/+If6XRC5whmJ34=",
-        "file": "./Series1/Exercise2/index.json",
-        "title": "Exercise2"
+        "id": "hR7M4cKCebO0LU+iKC0VbXjUj48=",
+        "file": "./Group1/Data2/index.json",
+        "title": "Data2"
       }
     ]
   }

@@ -2,7 +2,7 @@
   "spectra": [
     {
       "source": {
-        "jcampURL": "./Series1/Exercise2/13c.jdx"
+        "jcampURL": "./13c.jdx"
       },
       "display": {
         "name": ""
@@ -10,7 +10,7 @@
     },
     {
       "source": {
-        "jcampURL": "./Series1/Exercise2/cosy.jdx"
+        "jcampURL": "./cosy.jdx"
       },
       "display": {
         "name": ""

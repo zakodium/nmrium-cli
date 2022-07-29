@@ -2,7 +2,7 @@
   "spectra": [
     {
       "source": {
-        "jcampURL": "./Series1/Exercise2/13c.jdx"
+        "jcampURL": "./13c.jdx"
       },
       "molecules": [
         {
@@ -12,7 +12,7 @@
     },
     {
       "source": {
-        "jcampURL": "./Series1/Exercise2/cosy.jdx"
+        "jcampURL": "./cosy.jdx"
       },
       "molecules": [
         {

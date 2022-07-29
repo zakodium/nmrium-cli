@@ -2,7 +2,7 @@
   "spectra": [
     {
       "source": {
-        "jcampURL": "./Series1/Exercise1/1h.jdx"
+        "jcampURL": "./1h.jdx"
       },
       "molecules": [
         {

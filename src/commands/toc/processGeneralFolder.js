@@ -7,7 +7,7 @@ import { hashElement } from 'folder-hash';
 const debug = debugFct('nmrium.general');
 
 const URL_FOLDER = '.';
-let exercise = 0;
+let dataCount = 0;
 
 export async function processGeneralFolder(basename, folder, toc) {
   const currentFolder = join(basename, folder);
@@ -29,7 +29,7 @@ export async function processGeneralFolder(basename, folder, toc) {
   )) {
     const spectrum = {
       source: {
-        jcampURL: `./${folder}/${spectrumName}`,
+        jcampURL: `./${spectrumName}`,
       },
     };
     if (molfileName) {
@@ -49,13 +49,13 @@ export async function processGeneralFolder(basename, folder, toc) {
     .replace(/^[0-9]*$/, '')
     .replace(/^[0-9]*_/, '');
   if (!title) {
-    title = `Exercise ${++exercise}`;
+    title = `Data ${++dataCount}`;
   }
   const tocEntry = {
     id,
     file: `${URL_FOLDER}/${folder}/index.json`,
     title,
-    selected: exercise === 1 || undefined,
+    selected: dataCount === 1 || undefined,
   };
   toc.push(tocEntry);
 }
