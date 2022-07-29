@@ -3,6 +3,7 @@ import { join } from 'path';
 
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
+import { createTree } from 'jcampconverter';
 
 const debug = debugFct('nmrium.general');
 
@@ -23,15 +24,27 @@ export async function processGeneralFolder(basename, folder, toc) {
       files: { exclude: ['*.json'] },
     })
   ).hash;
-  for (let spectrumName of entries.filter(
+  for (let filename of entries.filter(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
+    // We have a look at the title
+    const jcampText = readFileSync(join(currentFolder, filename));
+    const tree = createTree(jcampText, {});
+    const title = tree[0]?.title;
+
     const spectrum = {
       source: {
-        jcampURL: `./${spectrumName}`,
+        jcampURL: `./${filename}`,
       },
     };
+
+    if (!title) {
+      spectrum.display = {
+        name: filename.replace(/^.*\//, ''),
+      };
+    }
+
     if (molfileName) {
       const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
       spectrum.molecules = [{ molfile }];
