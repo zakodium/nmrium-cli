@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.5.0...v0.6.0) (2022-08-10)
+
+
+### Features
+
+* add file name if title is empty ([7b82d4f](https://www.github.com/zakodium/nmrium-cli/commit/7b82d4f7b9d5656a78c66d8278b348b47ebcd6a8))
+* use relative links ([ccc0a20](https://www.github.com/zakodium/nmrium-cli/commit/ccc0a2018205fd92760db7cd5d519b56c3e6e952))
+
 ## [0.5.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.4.0...v0.5.0) (2022-07-28)
 
 
