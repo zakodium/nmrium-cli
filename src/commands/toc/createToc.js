@@ -33,9 +33,9 @@ export async function createToc(commandDir, folderProcessor, options = {}) {
     );
     for (let subfolder of folders) {
       // is there any molfile ?
-      let isDataFolder = readdirSync(
-        join(currentFolder, subfolder),
-      ).some((file) => file.match(/(?:.mol|.dx|.jdx)$/i));
+      let isDataFolder = readdirSync(join(currentFolder, subfolder)).some(
+        (file) => file.match(/(?:.mol|.dx|.jdx)$/i),
+      );
       if (isDataFolder) {
         await folderProcessor(basename, join(folder, subfolder), toc, options);
       } else {
