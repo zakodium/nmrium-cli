@@ -30,7 +30,6 @@ async function processFolder(
   folderProcessor,
   options = {},
 ) {
-
   debug('Processing folder: ', basename, folder);
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder).sort((a, b) => {

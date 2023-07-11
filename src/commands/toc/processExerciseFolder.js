@@ -26,7 +26,6 @@ export async function processExerciseFolder(
   toc,
   options = {},
 ) {
-
   let { spectraFilter } = options;
   if (spectraFilter) {
     spectraFilter = new RegExp(spectraFilter.split(',').join('|'), 'i');
@@ -55,7 +54,6 @@ export async function processExerciseFolder(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
-
     if (spectraFilter && !spectrumName.match(spectraFilter)) continue;
     spectra.push({
       source: {
