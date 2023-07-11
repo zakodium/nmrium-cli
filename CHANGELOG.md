@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/zakodium/nmrium-cli/compare/v0.6.0...v0.7.0) (2023-07-11)
+
+
+### Features
+
+* add spectraFilter ot make a selection of spectra for the exercises ([eeb830b](https://github.com/zakodium/nmrium-cli/commit/eeb830bd0d9d332c5af872a412cca57500a8d06c))
+
 ## [0.6.0](https://www.github.com/zakodium/nmrium-cli/compare/v0.5.0...v0.6.0) (2022-08-10)
 
 
