@@ -11,7 +11,27 @@ const debug = debugFct('nmrium.exercise');
 const URL_FOLDER = '.';
 let exercise = 0;
 
-export async function processExerciseFolder(basename, folder, toc) {
+/**
+ *
+ * @param {string} basename
+ * @param {string} folder
+ * @param {object} toc
+ * @param {object} [options={}]
+ * @param {string} [options.spectraFilter] - comma separated list of experiments to process, if not defined all experiments are processed
+ */
+
+export async function processExerciseFolder(
+  basename,
+  folder,
+  toc,
+  options = {},
+) {
+
+  let { spectraFilter } = options;
+  if (spectraFilter) {
+    spectraFilter = new RegExp(spectraFilter.split(',').join('|'), 'i');
+  }
+
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder);
   const molfileName = readdirSync(currentFolder).filter((file) =>
@@ -35,6 +55,8 @@ export async function processExerciseFolder(basename, folder, toc) {
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
+
+    if (spectraFilter && !spectrumName.match(spectraFilter)) continue;
     spectra.push({
       source: {
         jcampURL: `./${spectrumName}`,
