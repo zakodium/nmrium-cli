@@ -28,7 +28,10 @@ export async function processExerciseFolder(
 ) {
   let { spectraFilter } = options;
   if (spectraFilter) {
-    spectraFilter = new RegExp(spectraFilter.split(',').join('|'), 'i');
+    spectraFilter = new RegExp(
+      `^(${spectraFilter.split(',').join('|')}).`,
+      'i',
+    );
   }
 
   const currentFolder = join(basename, folder);
@@ -41,20 +44,16 @@ export async function processExerciseFolder(
   const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
   const molecule = Molecule.fromMolfile(molfile);
 
-  const id = (
-    await hashElement(currentFolder, {
-      folders: { exclude: ['*'] },
-      files: { exclude: ['*.json'] },
-    })
-  ).hash;
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
+  const includedFiles = []; // we only hash the included files to find out if it is the same exercise
   for (let spectrumName of entries.filter(
     (file) =>
       lstatSync(join(currentFolder, file)).isFile() && file.match(/dx$/i),
   )) {
     if (spectraFilter && !spectrumName.match(spectraFilter)) continue;
+    includedFiles.push(spectrumName);
     spectra.push({
       source: {
         jcampURL: `./${spectrumName}`,
@@ -64,6 +63,13 @@ export async function processExerciseFolder(
       },
     });
   }
+
+  const id = (
+    await hashElement(currentFolder, {
+      folders: { exclude: ['*'] },
+      files: { include: [...includedFiles, "*.mol"] },
+    })
+  ).hash;
 
   const targetPath = join(basename, folder, 'index.json');
   debug(`Create: ${targetPath}`);
