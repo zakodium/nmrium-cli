@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/zakodium/nmrium-cli/compare/v0.7.0...v0.7.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* exercise hash depends on the provided spectra ([27e4dfe](https://github.com/zakodium/nmrium-cli/commit/27e4dfe4aa80a031025455b05cf29f65ed221932))
+
 ## [0.7.0](https://github.com/zakodium/nmrium-cli/compare/v0.6.0...v0.7.0) (2023-07-11)
 
 
