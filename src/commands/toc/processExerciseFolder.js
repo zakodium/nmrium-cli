@@ -67,7 +67,7 @@ export async function processExerciseFolder(
   const id = (
     await hashElement(currentFolder, {
       folders: { exclude: ['*'] },
-      files: { include: [...includedFiles, "*.mol"] },
+      files: { include: [...includedFiles, '*.mol'] },
     })
   ).hash;
 
