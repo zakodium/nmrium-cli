@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { lstatSync, existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
