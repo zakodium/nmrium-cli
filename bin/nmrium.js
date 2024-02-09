@@ -1,4 +1,6 @@
 #!/usr/bin/env node
 
 process.env.DEBUG = 'nmrium.*';
-require('../lib/index.js');
+
+await import('../src/index.js')
+
