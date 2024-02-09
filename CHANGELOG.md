@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/zakodium/nmrium-cli/compare/v0.8.0...v0.8.1) (2024-02-09)
+
+
+### Bug Fixes
+
+* correctly create the command ([eaaad47](https://github.com/zakodium/nmrium-cli/commit/eaaad47e9d6b0a516c51bd486a490c5e048a888f))
+
 ## [0.8.0](https://github.com/zakodium/nmrium-cli/compare/v0.7.2...v0.8.0) (2024-02-09)
 
 
