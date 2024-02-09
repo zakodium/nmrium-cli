@@ -2,11 +2,11 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
-import { appendLinks } from './commands/appendLinks';
-import { createExercisesTOC } from './commands/createExercisesTOC';
-import { createGeneralTOC } from './commands/createGeneralTOC';
-import { deleteJSONs } from './commands/deleteJSONs';
-import { deleteStructures } from './commands/deleteStructures';
+import { appendLinks } from './commands/appendLinks.js';
+import { createExercisesTOC } from './commands/createExercisesTOC.js';
+import { createGeneralTOC } from './commands/createGeneralTOC.js';
+import { deleteJSONs } from './commands/deleteJSONs.js';
+import { deleteStructures } from './commands/deleteStructures.js';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
@@ -64,5 +64,10 @@ yargs(hideBin(process.argv))
     alias: 'd',
     type: 'string',
     description: 'Home directory containing the data',
+  })
+  .option('keepIdCode', {
+    alias: 'i',
+    type: 'boolean',
+    description: 'Add idCode in the exercise TOC',
   })
   .demandCommand().argv;

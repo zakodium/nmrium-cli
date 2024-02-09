@@ -2,8 +2,9 @@ import { statSync } from 'fs';
 import { join } from 'path';
 
 import readdir from 'recursive-readdir';
+import { expect, test } from 'vitest';
 
-import { createExercisesTOC } from '../commands/createExercisesTOC';
+import { createExercisesTOC } from '../commands/createExercisesTOC.js';
 
 const dataDir = join(__dirname, 'exercises');
 

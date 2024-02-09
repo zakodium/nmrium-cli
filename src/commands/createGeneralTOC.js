@@ -1,5 +1,5 @@
-import { createToc } from './toc/createToc';
-import { processGeneralFolder } from './toc/processGeneralFolder';
+import { createToc } from './toc/createToc.js';
+import { processGeneralFolder } from './toc/processGeneralFolder.js';
 
 /**
  * Add the links based on all the available toc files

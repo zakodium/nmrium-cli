@@ -4,7 +4,7 @@ import { join } from 'path';
 import debugFct from 'debug';
 import YAML from 'yaml';
 
-import writeTocs from './utils/writeTocs';
+import writeTocs from './utils/writeTocs.js';
 
 const debug = debugFct('nmrium.toc');
 
@@ -12,7 +12,8 @@ const debug = debugFct('nmrium.toc');
  * Create toc.json for the full project
  * @param {string} commandDir
  * @param {object} [options={}]
- * @param {string} [options.dataDir]
+ * @param {string} [options.dataDir=commandDir]
+ * @param {boolean} [options.keepIdCode=false] - Add the idCode to the toc
  */
 export async function createToc(commandDir, folderProcessor, options = {}) {
   const { dataDir = commandDir } = options;

@@ -4,7 +4,10 @@ import { join } from 'path';
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import md5 from 'md5';
-import { Molecule } from 'openchemlib';
+import OCL from 'openchemlib';
+
+const { Molecule } = OCL;
+
 
 const debug = debugFct('nmrium.exercise');
 
@@ -18,6 +21,7 @@ let exercise = 0;
  * @param {object} toc
  * @param {object} [options={}]
  * @param {string} [options.spectraFilter] - comma separated list of experiments to process, if not defined all experiments are processed
+ * @param {string} [options.keepIdCode=false] - Keep idCode in the toc
  */
 
 export async function processExerciseFolder(
@@ -26,7 +30,7 @@ export async function processExerciseFolder(
   toc,
   options = {},
 ) {
-  let { spectraFilter } = options;
+  let { spectraFilter, keepIdCode = false } = options;
   if (spectraFilter) {
     spectraFilter = new RegExp(
       `^(${spectraFilter.split(',').join('|')}).`,
@@ -87,6 +91,7 @@ export async function processExerciseFolder(
     id,
     mf,
     idCodeHash,
+    idCode: keepIdCode ? idCode : undefined,
     file: `${URL_FOLDER}/${folder}/index.json`,
     title,
     selected: exercise === 1 || undefined,
