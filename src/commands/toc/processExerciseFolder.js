@@ -8,7 +8,6 @@ import OCL from 'openchemlib';
 
 const { Molecule } = OCL;
 
-
 const debug = debugFct('nmrium.exercise');
 
 const URL_FOLDER = '.';
