@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.8.0](https://github.com/zakodium/nmrium-cli/compare/v0.7.2...v0.8.0) (2024-02-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to native module and add keepIdCode
+
+### Features
+
+* migrate to native module and add keepIdCode ([8945db6](https://github.com/zakodium/nmrium-cli/commit/8945db6b7f902dd631a7e3f2539b292d0dcce584))
+
 ## [0.7.2](https://github.com/zakodium/nmrium-cli/compare/v0.7.1...v0.7.2) (2023-07-12)
 
 
