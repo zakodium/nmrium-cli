@@ -1,4 +1,10 @@
-import { lstatSync, readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
+import {
+  lstatSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  existsSync,
+} from 'fs';
 import { join } from 'path';
 
 import debugFct from 'debug';
@@ -64,9 +70,14 @@ export async function processGeneralFolder(basename, folder, toc) {
   const targetPath = join(basename, folder, 'index.json');
   debug(`Create: ${targetPath}`);
 
-  writeFileSync(targetPath, JSON.stringify({ spectra, molecules }, undefined, 2), 'utf8');
+  writeFileSync(
+    targetPath,
+    JSON.stringify({ spectra, molecules }, undefined, 2),
+    'utf8',
+  );
 
-  let title = folderConfig.menuLabel ||
+  let title =
+    folderConfig.menuLabel ||
     folder
       .replace(/^[^/]*\//, '')
       .replace(/^[0-9]*$/, '')
