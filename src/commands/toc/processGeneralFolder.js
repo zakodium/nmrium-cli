@@ -1,9 +1,10 @@
-import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
+import { lstatSync, readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import { createTree } from 'jcampconverter';
+import YAML from 'yaml';
 
 const debug = debugFct('nmrium.general');
 
@@ -12,10 +13,23 @@ let dataCount = 0;
 
 export async function processGeneralFolder(basename, folder, toc) {
   const currentFolder = join(basename, folder);
-  const entries = readdirSync(currentFolder);
-  const molfileName = readdirSync(currentFolder).filter((file) =>
+
+  const folderConfigFilename = join(currentFolder, 'index.yml');
+  const folderConfig = existsSync(folderConfigFilename)
+    ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
+    : {};
+
+  // Loading all the molfiles
+  const molfileNames = readdirSync(currentFolder).filter((file) =>
     file.toLowerCase().endsWith('.mol'),
-  )[0];
+  );
+  const molecules = [];
+  for (let molfileName of molfileNames) {
+    const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
+    molecules.push({ molfile });
+  }
+
+  const entries = readdirSync(currentFolder);
   const spectra = [];
   // we process only the folder if there is an answer (structure.mol)
   const id = (
@@ -32,7 +46,6 @@ export async function processGeneralFolder(basename, folder, toc) {
     const jcampText = readFileSync(join(currentFolder, filename));
     const tree = createTree(jcampText, {});
     const title = tree[0]?.title;
-
     const spectrum = {
       source: {
         jcampURL: `./${filename}`,
@@ -45,25 +58,20 @@ export async function processGeneralFolder(basename, folder, toc) {
       };
     }
 
-    if (molfileName) {
-      const molfile = readFileSync(join(currentFolder, molfileName), 'utf8');
-      spectrum.molecules = [{ molfile }];
-    }
     spectra.push(spectrum);
   }
 
   const targetPath = join(basename, folder, 'index.json');
   debug(`Create: ${targetPath}`);
 
-  writeFileSync(targetPath, JSON.stringify({ spectra }, undefined, 2), 'utf8');
+  writeFileSync(targetPath, JSON.stringify({ spectra, molecules }, undefined, 2), 'utf8');
 
-  let title = folder
-    .replace(/^[^/]*\//, '')
-    .replace(/^[0-9]*$/, '')
-    .replace(/^[0-9]*_/, '');
-  if (!title) {
-    title = `Data ${++dataCount}`;
-  }
+  let title = folderConfig.menuLabel ||
+    folder
+      .replace(/^[^/]*\//, '')
+      .replace(/^[0-9]*$/, '')
+      .replace(/^[0-9]*_/, '') ||
+    `Data ${++dataCount}`;
   const tocEntry = {
     id,
     file: `${URL_FOLDER}/${folder}/index.json`,
