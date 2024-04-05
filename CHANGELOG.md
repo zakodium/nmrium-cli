@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/zakodium/nmrium-cli/compare/v0.8.1...v0.9.0) (2024-04-05)
+
+
+### Features
+
+* use title to display spectrum name by default ([#21](https://github.com/zakodium/nmrium-cli/issues/21)) ([b43d6d8](https://github.com/zakodium/nmrium-cli/commit/b43d6d8374a8aacc7d12764f6caeb39279dad7c6))
+
+
+### Bug Fixes
+
+* molfiles were not correctly placed ([b0a67b8](https://github.com/zakodium/nmrium-cli/commit/b0a67b8c0300d00b3e18272853442bf08e117f25))
+
 ## [0.8.1](https://github.com/zakodium/nmrium-cli/compare/v0.8.0...v0.8.1) (2024-02-09)
 
 
