@@ -58,11 +58,9 @@ export async function processGeneralFolder(basename, folder, toc) {
       },
     };
 
-    if (!title) {
-      spectrum.display = {
-        name: filename.replace(/^.*\//, ''),
-      };
-    }
+    spectrum.display = {
+      name: title || filename.replace(/^.*\//, ''),
+    };
 
     spectra.push(spectrum);
   }

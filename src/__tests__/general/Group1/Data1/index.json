@@ -3,6 +3,9 @@
     {
       "source": {
         "jcampURL": "./1h.jdx"
+      },
+      "display": {
+        "name": "Experiment 1"
       }
     }
   ],
