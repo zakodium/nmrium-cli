@@ -1,25 +1,48 @@
 {
-  "spectra": [
-    {
-      "source": {
-        "jcampURL": "./13c.jdx"
+  "data": {
+    "spectra": [
+      {
+        "display": {},
+        "sourceSelector": {
+          "files": [
+            "13c.jdx"
+          ]
+        },
+        "filters": [],
+        "info": {
+          "name": "13c.jdx"
+        }
       },
-      "display": {
-        "name": "13c.jdx"
+      {
+        "display": {},
+        "sourceSelector": {
+          "files": [
+            "cosy.jdx"
+          ]
+        },
+        "filters": [],
+        "info": {
+          "name": "cosy.jdx"
+        }
       }
-    },
-    {
-      "source": {
-        "jcampURL": "./cosy.jdx"
-      },
-      "display": {
-        "name": "cosy.jdx"
+    ],
+    "molecules": [
+      {
+        "molfile": "\n  ChemDraw05122111372D\n\n  2  1  0  0  0  0  0  0  0  0999 V2000\n   -0.3572   -0.2062    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3572    0.2062    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0      \nM  END\n"
       }
+    ],
+    "source": {
+      "entries": [
+        {
+          "baseURL": "",
+          "relativePath": "13c.jdx"
+        },
+        {
+          "baseURL": "",
+          "relativePath": "cosy.jdx"
+        }
+      ]
     }
-  ],
-  "molecules": [
-    {
-      "molfile": "\n  ChemDraw05122111372D\n\n  2  1  0  0  0  0  0  0  0  0999 V2000\n   -0.3572   -0.2062    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3572    0.2062    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0      \nM  END\n"
-    }
-  ]
+  },
+  "version": 6
 }

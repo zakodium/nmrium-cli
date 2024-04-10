@@ -3,27 +3,54 @@ import {
   readFileSync,
   readdirSync,
   writeFileSync,
-  existsSync,
 } from 'fs';
 import { join } from 'path';
 
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import { createTree } from 'jcampconverter';
-import YAML from 'yaml';
+import { migrate } from 'nmr-load-save'
+
+import { getFolderConfig } from './getFolderConfig.js';
 
 const debug = debugFct('nmrium.general');
 
 const URL_FOLDER = '.';
 let dataCount = 0;
 
-export async function processGeneralFolder(basename, folder, toc) {
+export async function processGeneralFolder(basename, folder, toc, options) {
   const currentFolder = join(basename, folder);
+  options = { ...options, ...getFolderConfig(currentFolder) }
 
-  const folderConfigFilename = join(currentFolder, 'index.yml');
-  const folderConfig = existsSync(folderConfigFilename)
-    ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
-    : {};
+  const { id, nmrium } = await loadData(currentFolder, options);
+
+
+  const targetPath = join(basename, folder, 'index.json');
+  debug(`Create: ${targetPath}`);
+
+  writeFileSync(
+    targetPath,
+    JSON.stringify(nmrium, undefined, 2),
+    'utf8',
+  );
+
+  let title =
+    options.menuLabel ||
+    folder
+      .replace(/^[^/]*\//, '')
+      .replace(/^[0-9]*$/, '')
+      .replace(/^[0-9]*_/, '') ||
+    `Data ${++dataCount}`;
+  const tocEntry = {
+    id,
+    file: `${URL_FOLDER}/${folder}/index.json`,
+    title,
+    selected: dataCount === 1 || undefined,
+  };
+  toc.push(tocEntry);
+}
+
+async function loadData(currentFolder, options = {}) {
 
   // Loading all the molfiles
   const molfileNames = readdirSync(currentFolder).filter((file) =>
@@ -65,27 +92,9 @@ export async function processGeneralFolder(basename, folder, toc) {
     spectra.push(spectrum);
   }
 
-  const targetPath = join(basename, folder, 'index.json');
-  debug(`Create: ${targetPath}`);
-
-  writeFileSync(
-    targetPath,
-    JSON.stringify({ spectra, molecules }, undefined, 2),
-    'utf8',
-  );
-
-  let title =
-    folderConfig.menuLabel ||
-    folder
-      .replace(/^[^/]*\//, '')
-      .replace(/^[0-9]*$/, '')
-      .replace(/^[0-9]*_/, '') ||
-    `Data ${++dataCount}`;
-  const tocEntry = {
-    id,
-    file: `${URL_FOLDER}/${folder}/index.json`,
-    title,
-    selected: dataCount === 1 || undefined,
-  };
-  toc.push(tocEntry);
+  const nmrium = migrate({ spectra, molecules });
+  if (options.settings) {
+    nmrium.settings = options.settings;
+  }
+  return { id, nmrium }
 }

@@ -1,10 +1,10 @@
 /* eslint-disable no-await-in-loop */
-import { lstatSync, existsSync, readFileSync, readdirSync } from 'fs';
+import { lstatSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 import debugFct from 'debug';
-import YAML from 'yaml';
 
+import { getFolderConfig } from './getFolderConfig.js';
 import writeTocs from './utils/writeTocs.js';
 
 const debug = debugFct('nmrium.toc');
@@ -52,10 +52,7 @@ async function processFolder(
     if (isDataFolder) {
       await folderProcessor(basename, join(folder, subfolder), toc, options);
     } else {
-      const folderConfigFilename = join(currentFolder, subfolder, 'index.yml');
-      const folderConfig = existsSync(folderConfigFilename)
-        ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
-        : {};
+      const folderConfig = getFolderConfig(join(currentFolder, subfolder));
       const subTOC = {
         groupName: folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
         folderName: subfolder,
@@ -67,7 +64,7 @@ async function processFolder(
         join(folder, subfolder),
         subTOC.children,
         folderProcessor,
-        { ...options, ...folderConfig },
+        { ...options },
       );
     }
   }
