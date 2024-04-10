@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/zakodium/nmrium-cli/compare/v0.9.0...v0.10.0) (2024-04-10)
+
+
+### Features
+
+* allow to specify settingsFilename in index.yml to change the layout ([b3e3f6c](https://github.com/zakodium/nmrium-cli/commit/b3e3f6ce77eac06f55d66e6e8b230bb2a2b3616a))
+
 ## [0.9.0](https://github.com/zakodium/nmrium-cli/compare/v0.8.1...v0.9.0) (2024-04-05)
 
 
