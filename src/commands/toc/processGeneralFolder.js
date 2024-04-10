@@ -1,15 +1,10 @@
-import {
-  lstatSync,
-  readFileSync,
-  readdirSync,
-  writeFileSync,
-} from 'fs';
+import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import { createTree } from 'jcampconverter';
-import { migrate } from 'nmr-load-save'
+import { migrate } from 'nmr-load-save';
 
 import { getFolderConfig } from './getFolderConfig.js';
 
@@ -20,19 +15,14 @@ let dataCount = 0;
 
 export async function processGeneralFolder(basename, folder, toc, options) {
   const currentFolder = join(basename, folder);
-  options = { ...options, ...getFolderConfig(currentFolder) }
+  options = { ...options, ...getFolderConfig(currentFolder) };
 
   const { id, nmrium } = await loadData(currentFolder, options);
-
 
   const targetPath = join(basename, folder, 'index.json');
   debug(`Create: ${targetPath}`);
 
-  writeFileSync(
-    targetPath,
-    JSON.stringify(nmrium, undefined, 2),
-    'utf8',
-  );
+  writeFileSync(targetPath, JSON.stringify(nmrium, undefined, 2), 'utf8');
 
   let title =
     options.menuLabel ||
@@ -51,7 +41,6 @@ export async function processGeneralFolder(basename, folder, toc, options) {
 }
 
 async function loadData(currentFolder, options = {}) {
-
   // Loading all the molfiles
   const molfileNames = readdirSync(currentFolder).filter((file) =>
     file.toLowerCase().endsWith('.mol'),
@@ -96,5 +85,5 @@ async function loadData(currentFolder, options = {}) {
   if (options.settings) {
     nmrium.settings = options.settings;
   }
-  return { id, nmrium }
+  return { id, nmrium };
 }

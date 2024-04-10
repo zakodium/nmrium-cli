@@ -11,7 +11,9 @@ export function getFolderConfig(folder) {
   if (folderConfig.settingsFilename) {
     const settingsFilename = join(folder, folderConfig.settingsFilename);
     if (existsSync(settingsFilename)) {
-      folderConfig.settings = JSON.parse(readFileSync(settingsFilename, 'utf8'));
+      folderConfig.settings = JSON.parse(
+        readFileSync(settingsFilename, 'utf8'),
+      );
     }
   }
   return folderConfig;
