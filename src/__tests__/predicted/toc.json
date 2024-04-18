@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Oz9gTP3NhSQZlWBu4aT4cizhQzg=",
+    "mf": "C4H8O2",
+    "idCodeHash": "8dce89763ab899350b4a01be188c1555",
+    "idCode": "gGP`@df]j`@",
+    "file": "./Bsp1/index.json",
+    "title": "Bsp1",
+    "selected": true
+  },
+  {
+    "id": "GB/QvJA7yF7b/Swd7ZUZZIhb91s=",
+    "mf": "C4H8O2",
+    "idCodeHash": "134d499936f8fedb1170e3f741f72b9e",
+    "idCode": "gGP`@dfUj`@",
+    "file": "./Bsp2/index.json",
+    "title": "Bsp2"
+  },
+  {
+    "id": "z3uJ3OLwf2z/bAlG9yYAuADV/gA=",
+    "mf": "C4H8O",
+    "idCodeHash": "21dcc0027d441801e362cec51f90e9b9",
+    "idCode": "gJQ@@eKS@@",
+    "file": "./ethylvinylether/index.json",
+    "title": "ethylvinylether"
+  }
+]
