@@ -7,12 +7,13 @@ import { createExercisesTOC } from './commands/createExercisesTOC.js';
 import { createGeneralTOC } from './commands/createGeneralTOC.js';
 import { deleteJSONs } from './commands/deleteJSONs.js';
 import { deleteStructures } from './commands/deleteStructures.js';
+import { predictSpectra } from './commands/predictSpectra.js';
 
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
   .scriptName('nmrium')
   .command({
-    command: 'createExercisesTOC [options]',
+    command: 'predictSpectra [options]',
     aliases: [],
     desc: 'Build toc.json for exercises',
     builder: (yargs) => yargs,
@@ -43,6 +44,14 @@ yargs(hideBin(process.argv))
     builder: (yargs) => yargs,
     handler: (argv) => {
       deleteStructures(homeDir, { ...argv });
+    },
+  })
+  .command({
+    command: 'predictSpectra [options]',
+    desc: 'Predict 1H spectra if there is a molfile in the folder',
+    builder: (yargs) => yargs,
+    handler: (argv) => {
+      predictSpectra(homeDir, { ...argv });
     },
   })
   .command({
