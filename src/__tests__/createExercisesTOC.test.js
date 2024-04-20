@@ -20,7 +20,7 @@ test('createExercisesTOC', async () => {
 });
 
 test('createExercisesTOC with predicted', async () => {
-  const dataDir = join(__dirname, 'predicted');
+  const dataDir = join(__dirname, 'acdPrediction');
   await createExercisesTOC(__dirname, {
     dataDir,
     keepIdCode: true,

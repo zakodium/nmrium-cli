@@ -7,7 +7,7 @@ import dir from 'fs-readdir-recursive';
  * Create toc.json for the full project
  * @param {string} commandDir
  * @param {object} [options={}]
- * @param {boolean} [options.dataDir]
+ * @param {string} [options.dataDir]
  */
 export function deleteJSONs(commandDir, options = {}) {
   const { dataDir = commandDir } = options;

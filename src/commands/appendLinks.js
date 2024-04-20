@@ -8,7 +8,7 @@ import parseGitURL from 'git-url-parse';
  * Add the links based on all the available toc files
  * @param {string} commandDir
  * @param {object} [options={}]
- * @param {boolean} [options.dataDir]
+ * @param {string} [options.dataDir]
  */
 export async function appendLinks(commandDir, options = {}) {
   const {
