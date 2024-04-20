@@ -42,6 +42,7 @@
   "dependencies": {
     "convert-to-jcamp": "^5.4.10",
     "debug": "^4.3.4",
+    "fifo-logger": "^1.0.0",
     "folder-hash": "^4.0.4",
     "fs-readdir-recursive": "^1.1.0",
     "git-remote-origin-url": "^3.1.0",

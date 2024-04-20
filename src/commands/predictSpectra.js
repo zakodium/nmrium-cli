@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   mkdirSync,
   existsSync,
@@ -13,12 +14,14 @@ import md5 from 'md5';
 import { spectrum1DToJcamp } from 'nmr-load-save';
 import { predictSpectra as predictor } from 'nmr-processing';
 import OCL from 'openchemlib';
+import { nbLabileH } from 'openchemlib-utils';
 
 const { Molecule } = OCL;
 /**
  * Add the links based on all the available toc files
  * @param {string} commandDir
  * @param {object} [options={}]
+ * @param {import()} [options={}]
  */
 export async function predictSpectra(commandDir, options = {}) {
   const { dataDir = commandDir } = options;
@@ -36,9 +39,20 @@ export async function predictSpectra(commandDir, options = {}) {
       file.toLowerCase().endsWith('.mol'),
     );
     if (files.length === 0) continue;
+
+    const outputFilename = join(folder, '1h.jdx');
+    if (existsSync(outputFilename)) {
+      console.log(`Skipping: ${folder} because it already has a 1H jdx file`);
+      continue
+    }
+
     const molfile = readFileSync(join(folder, files[0]), 'utf8');
     const molecule = Molecule.fromMolfile(molfile);
 
+    if (nbLabileH(molecule) > 0) {
+      console.log(`Skipping: ${folder}because it has labile protons`);
+      continue;
+    }
 
     // eslint-disable-next-line no-await-in-loop
     const spectra = await predictor(molecule, {
@@ -53,7 +67,7 @@ export async function predictSpectra(commandDir, options = {}) {
       },
     });
     const jcamp = spectrum1DToJcamp(spectra.spectra[0]);
-    writeFileSync(join(folder, '1h.jdx'), jcamp, 'utf8');
+    writeFileSync(outputFilename, jcamp, 'utf8');
   }
 }
 
