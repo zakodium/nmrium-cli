@@ -21,12 +21,12 @@ const { Molecule } = OCL;
  * Add the links based on all the available toc files
  * @param {string} commandDir
  * @param {object} [options={}]
- * @param {import()} [options={}]
+ * @param {string} [options.dataDir]
+ * @param {number} [options.frequency]
  */
 export async function predictSpectra(commandDir, options = {}) {
-  const { dataDir = commandDir } = options;
-  const { protonCache = join(__dirname, '../../data/predictionCache/proton') } =
-    options;
+  const { dataDir = commandDir, frequency = 400 } = options;
+  const protonCache = join(__dirname, '../../data/predictionCache/proton')
   mkdirSync(protonCache, { recursive: true });
 
   // we search for all the folders and we check if there is a molfile
@@ -58,7 +58,7 @@ export async function predictSpectra(commandDir, options = {}) {
     const spectra = await predictor(molecule, {
       prediction: { predictOptions: { H: { cache: protonCache } } },
       simulation: {
-        frequency: 400,
+        frequency,
         oneD: {
           proton: { from: 0, to: 14 },
           nbPoints: 65536,
