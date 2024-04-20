@@ -12,7 +12,7 @@ test('predictSpectra', async () => {
   const logs = [];
   console.log = (message) => logs.push(message);
   await predictSpectra(__dirname, { dataDir });
-  expect(logs.filter(log => log.includes('labile'))).toHaveLength(1);
-  expect(logs.filter(log => log.includes('Skipping'))).toHaveLength(5);
+  expect(logs.filter((log) => log.includes('labile'))).toHaveLength(1);
+  expect(logs.filter((log) => log.includes('Skipping'))).toHaveLength(5);
   console.log = originalConsoleLog;
 });

@@ -8,8 +8,6 @@ import {
 } from 'fs';
 import { join } from 'path';
 
-
-
 import md5 from 'md5';
 import { spectrum1DToJcamp } from 'nmr-load-save';
 import { predictSpectra as predictor } from 'nmr-processing';
@@ -26,7 +24,7 @@ const { Molecule } = OCL;
  */
 export async function predictSpectra(commandDir, options = {}) {
   const { dataDir = commandDir, frequency = 400 } = options;
-  const protonCache = join(__dirname, '../../data/predictionCache/proton')
+  const protonCache = join(__dirname, '../../data/predictionCache/proton');
   mkdirSync(protonCache, { recursive: true });
 
   // we search for all the folders and we check if there is a molfile
@@ -43,7 +41,7 @@ export async function predictSpectra(commandDir, options = {}) {
     const outputFilename = join(folder, '1h.jdx');
     if (existsSync(outputFilename)) {
       console.log(`Skipping: ${folder} because it already has a 1H jdx file`);
-      continue
+      continue;
     }
 
     const molfile = readFileSync(join(folder, files[0]), 'utf8');
@@ -90,4 +88,3 @@ export function getFSCache(cacheFolder) {
     }
   };
 }
-
