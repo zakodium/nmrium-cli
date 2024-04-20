@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/zakodium/nmrium-cli/compare/v0.11.0...v0.12.0) (2024-04-20)
+
+
+### Features
+
+* add createMolfilesFromSMILES ([280cd52](https://github.com/zakodium/nmrium-cli/commit/280cd523d666d3c201e913537bf3ddbe977fb15d))
+
 ## [0.11.0](https://github.com/zakodium/nmrium-cli/compare/v0.10.0...v0.11.0) (2024-04-18)
 
 
