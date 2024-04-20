@@ -25,6 +25,7 @@ const { Molecule } = OCL;
 export async function predictSpectra(commandDir, options = {}) {
   const { dataDir = commandDir, frequency = 400 } = options;
   const protonCache = join(__dirname, '../../data/predictionCache/proton');
+
   mkdirSync(protonCache, { recursive: true });
 
   // we search for all the folders and we check if there is a molfile

@@ -5,6 +5,7 @@ import yargs from 'yargs/yargs';
 import { appendLinks } from './commands/appendLinks.js';
 import { createExercisesTOC } from './commands/createExercisesTOC.js';
 import { createGeneralTOC } from './commands/createGeneralTOC.js';
+import { createMolfilesFromSMILES } from './commands/createMolfilesFromSMILES.js';
 import { deleteJSONs } from './commands/deleteJSONs.js';
 import { deleteStructures } from './commands/deleteStructures.js';
 import { predictSpectra } from './commands/predictSpectra.js';
@@ -44,8 +45,18 @@ yargs(hideBin(process.argv))
     },
   })
   .command(
+    'createMolfilesFromSMILES [options]',
+    'From a .txt file containing a list of SMILES we will create a sequence of folder that contains a structure.mol file. This is used to quickly create exercises from a list of SMILES.',
+    {
+      builder: (yargs) => yargs,
+      handler: (argv) => {
+        createMolfilesFromSMILES(homeDir, { ...argv });
+      },
+    },
+  )
+  .command(
     'predictSpectra [options]',
-    'Predict 1H spectra if there is a molfile in the folder',
+    'Predict 1H spectra for all the folder in which there is a molfile',
     {
       builder: (yargs) => {
         return yargs.option('frequency', {
