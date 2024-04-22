@@ -3,9 +3,10 @@ import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
 import { appendLinks } from './commands/appendLinks.js';
+import { createExercisesCorrection } from './commands/createExercisesCorrection.js';
 import { createExercisesTOC } from './commands/createExercisesTOC.js';
 import { createGeneralTOC } from './commands/createGeneralTOC.js';
-import { createMolfilesFromSMILES } from './commands/createMolfilesFromSMILES.js';
+import { createMolfilesFromFiles } from './commands/createMolfilesFromFiles.js';
 import { deleteJSONs } from './commands/deleteJSONs.js';
 import { deleteStructures } from './commands/deleteStructures.js';
 import { predictSpectra } from './commands/predictSpectra.js';
@@ -13,7 +14,7 @@ import { predictSpectra } from './commands/predictSpectra.js';
 const homeDir = process.cwd();
 yargs(hideBin(process.argv))
   .scriptName('nmrium')
-  .command('createExercisesToc [options]', 'Build toc.json for exercises', {
+  .command('createExercisesTOC [options]', 'Build toc.json for exercises', {
     builder: (yargs) => {
       return yargs.option('keepIdCode', {
         alias: 'i',
@@ -32,6 +33,17 @@ yargs(hideBin(process.argv))
       createGeneralTOC(homeDir, { ...argv });
     },
   })
+  .command(
+    'createExercisesCorrection [options]',
+    'Will scan all the folders and generate a .md file containing all the structures',
+    {
+      aliases: [],
+      builder: (yargs) => yargs,
+      handler: (argv) => {
+        createExercisesCorrection(homeDir, { ...argv });
+      },
+    },
+  )
   .command('deleteJSONs [options]', 'Remove all .json files', {
     builder: (yargs) => yargs,
     handler: (argv) => {
@@ -45,12 +57,12 @@ yargs(hideBin(process.argv))
     },
   })
   .command(
-    'createMolfilesFromSMILES [options]',
-    'From a .txt file containing a list of SMILES we will create a sequence of folder that contains a structure.mol file. This is used to quickly create exercises from a list of SMILES.',
+    'createMolfilesFromFiles [options]',
+    'From a .txt file containing a list of SMILES or a .sdf file we will create a sequence of folder that contains a structure.mol file. This is used to quickly create exercises from a list of SMILES. There may be one file per folder.',
     {
       builder: (yargs) => yargs,
       handler: (argv) => {
-        createMolfilesFromSMILES(homeDir, { ...argv });
+        createMolfilesFromFiles(homeDir, { ...argv });
       },
     },
   )

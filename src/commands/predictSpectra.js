@@ -1,14 +1,7 @@
 /* eslint-disable no-console */
-import {
-  mkdirSync,
-  existsSync,
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-} from 'fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import md5 from 'md5';
 import { spectrum1DToJcamp } from 'nmr-load-save';
 import { predictSpectra as predictor } from 'nmr-processing';
 import OCL from 'openchemlib';
@@ -24,9 +17,6 @@ const { Molecule } = OCL;
  */
 export async function predictSpectra(commandDir, options = {}) {
   const { dataDir = commandDir, frequency = 400 } = options;
-  const protonCache = join(__dirname, '../../data/predictionCache/proton');
-
-  mkdirSync(protonCache, { recursive: true });
 
   // we search for all the folders and we check if there is a molfile
   // if there is a molfile we predict the spectra
@@ -55,7 +45,7 @@ export async function predictSpectra(commandDir, options = {}) {
 
     // eslint-disable-next-line no-await-in-loop
     const spectra = await predictor(molecule, {
-      prediction: { predictOptions: { H: { cache: protonCache } } },
+      prediction: { predictOptions: { H: {} } },
       simulation: {
         frequency,
         oneD: {
@@ -68,24 +58,4 @@ export async function predictSpectra(commandDir, options = {}) {
     const jcamp = spectrum1DToJcamp(spectra.spectra[0]);
     writeFileSync(outputFilename, jcamp, 'utf8');
   }
-}
-
-export function getFSCache(cacheFolder) {
-  mkdirSync(cacheFolder, { recursive: true });
-
-  return (id, prediction) => {
-    console.log('getFSCache', id, prediction);
-    const hash = md5(id);
-    const filename = join(cacheFolder, `${hash}.json`);
-
-    if (prediction === undefined) {
-      if (existsSync(filename)) {
-        console.log('Prediction from cache');
-        return JSON.parse(readFileSync(filename, 'utf8'));
-      }
-    } else {
-      console.log('Writing prediction to cache', filename);
-      writeFileSync(filename, JSON.stringify(prediction));
-    }
-  };
 }

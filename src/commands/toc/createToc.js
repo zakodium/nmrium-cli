@@ -19,6 +19,8 @@ const debug = debugFct('nmrium.toc');
 export async function createToc(commandDir, folderProcessor, options = {}) {
   const { dataDir = commandDir } = options;
 
+  debug(`Creating TOC of: ${dataDir}`);
+
   let toc = [];
   await processFolder(dataDir, '.', toc, folderProcessor, options);
   debug(`Save: ${join(dataDir, 'toc.json')}`);
@@ -52,20 +54,27 @@ async function processFolder(
     if (isDataFolder) {
       await folderProcessor(basename, join(folder, subfolder), toc, options);
     } else {
-      const folderConfig = getFolderConfig(join(currentFolder, subfolder));
-      const subTOC = {
-        groupName: folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
-        folderName: subfolder,
-        children: [],
-      };
-      toc.push(subTOC);
-      await processFolder(
-        basename,
-        join(folder, subfolder),
-        subTOC.children,
-        folderProcessor,
-        { ...options },
-      );
+      // is there any files in the folder
+      let containsData = readdirSync(join(currentFolder, subfolder), {
+        recursive: true,
+      }).some((file) => file.match(/(?:.mol|.dx|.jdx)$/i));
+      if (containsData) {
+        const folderConfig = getFolderConfig(join(currentFolder, subfolder));
+        const subTOC = {
+          groupName:
+            folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
+          folderName: subfolder,
+          children: [],
+        };
+        toc.push(subTOC);
+        await processFolder(
+          basename,
+          join(folder, subfolder),
+          subTOC.children,
+          folderProcessor,
+          { ...options },
+        );
+      }
     }
   }
 }

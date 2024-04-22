@@ -53,6 +53,7 @@
     "nmr-processing": "^12.2.0",
     "openchemlib": "^8.9.0",
     "recursive-iterator": "^3.3.0",
+    "sdf-parser": "^6.0.1",
     "traverse": "^0.6.8",
     "yaml": "^2.3.4",
     "yargs": "^17.7.2"

@@ -34,7 +34,11 @@ export async function appendLinks(commandDir, options = {}) {
   // We will check if we have sub tocs
   const subTocs = toc
     .filter((item) => item.children)
-    .filter((item) => existsSync(join(dataDir, `toc_${item.folderName}.json`)))
+    .filter((item) =>
+      existsSync(
+        join(dataDir, `toc_${encodeURIComponent(item.folderName)}.json`),
+      ),
+    )
     .map((item) => ({
       groupName: item.groupName,
       tocName: `toc_${item.folderName}.json`,
