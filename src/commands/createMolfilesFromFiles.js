@@ -42,7 +42,6 @@ function fromSDFFile(folder) {
   if (!file) return;
 
   const molecules = parse(readFileSync(join(folder, file), 'utf8')).molecules;
-  console.log(molecules);
 
   for (let i = 0; i < molecules.length; i++) {
     const folderName = `0000${i + 1}`.slice(-2);
