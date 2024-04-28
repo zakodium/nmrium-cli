@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.0](https://github.com/zakodium/nmrium-cli/compare/v0.12.0...v0.13.0) (2024-04-28)
+
+
+### Features
+
+* add default in config ([977c5c4](https://github.com/zakodium/nmrium-cli/commit/977c5c4489f84fab3e731758961f75f6fef8d37c))
+* allows to have relative dataDir ([9d196ff](https://github.com/zakodium/nmrium-cli/commit/9d196ff5643533825bed7c271528826f2f003842))
+
 ## [0.12.0](https://github.com/zakodium/nmrium-cli/compare/v0.11.0...v0.12.0) (2024-04-20)
 
 ### Features
