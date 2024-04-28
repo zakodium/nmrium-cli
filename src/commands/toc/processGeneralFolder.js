@@ -15,7 +15,10 @@ let dataCount = 0;
 
 export async function processGeneralFolder(basename, folder, toc, options) {
   const currentFolder = join(basename, folder);
-  options = { ...options, ...getFolderConfig(currentFolder) };
+
+  const { folderConfig, defaultFolderConfig } = getFolderConfig(currentFolder);
+
+  options = { ...options, ...defaultFolderConfig, ...folderConfig };
 
   const { id, nmrium } = await loadData(currentFolder, options);
 

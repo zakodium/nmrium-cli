@@ -18,7 +18,6 @@ const debug = debugFct('nmrium.toc');
  */
 export async function createToc(commandDir, folderProcessor, options = {}) {
   const { dataDir = commandDir } = options;
-
   debug(`Creating TOC of: ${dataDir}`);
 
   let toc = [];
@@ -46,6 +45,10 @@ async function processFolder(
       lstatSync(join(currentFolder, file)).isDirectory(),
   );
 
+  // top level configuration ?
+  const { defaultFolderConfig } = getFolderConfig(currentFolder);
+  options = { ...defaultFolderConfig, ...options };
+
   for (let subfolder of folders) {
     // is there any molfile ?
     let isDataFolder = readdirSync(join(currentFolder, subfolder)).some(
@@ -59,7 +62,9 @@ async function processFolder(
         recursive: true,
       }).some((file) => file.match(/(?:.mol|.dx|.jdx)$/i));
       if (containsData) {
-        const folderConfig = getFolderConfig(join(currentFolder, subfolder));
+        const { folderConfig, defaultFolderConfig } = getFolderConfig(
+          join(currentFolder, subfolder),
+        );
         const subTOC = {
           groupName:
             folderConfig.menuLabel || subfolder.replace(/^[0-9]*_/, ''),
@@ -72,7 +77,7 @@ async function processFolder(
           join(folder, subfolder),
           subTOC.children,
           folderProcessor,
-          { ...options },
+          { ...defaultFolderConfig, ...options },
         );
       }
     }

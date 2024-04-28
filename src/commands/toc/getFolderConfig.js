@@ -8,13 +8,26 @@ export function getFolderConfig(folder) {
   const folderConfig = existsSync(folderConfigFilename)
     ? YAML.parse(readFileSync(folderConfigFilename, 'utf8'))
     : {};
-  if (folderConfig.settingsFilename) {
-    const settingsFilename = join(folder, folderConfig.settingsFilename);
+
+  const defaultFolderConfig = folderConfig.default || {};
+  delete folderConfig.default;
+
+  loadSettings(folderConfig, folder);
+  loadSettings(defaultFolderConfig, folder);
+
+
+  return {
+    folderConfig: { ...defaultFolderConfig, ...folderConfig }, defaultFolderConfig
+  };
+}
+
+function loadSettings(config, folder) {
+  if (config.settingsFilename) {
+    const settingsFilename = join(folder, config.settingsFilename);
     if (existsSync(settingsFilename)) {
-      folderConfig.settings = JSON.parse(
+      config.settings = JSON.parse(
         readFileSync(settingsFilename, 'utf8'),
       );
     }
   }
-  return folderConfig;
 }

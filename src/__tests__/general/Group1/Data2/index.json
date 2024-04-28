@@ -44,5 +44,13 @@
       ]
     }
   },
-  "version": 6
+  "version": 6,
+  "settings": {
+    "display": {
+      "general": {
+        "hideGeneralSettings": true
+      }
+    },
+    "version": 2
+  }
 }

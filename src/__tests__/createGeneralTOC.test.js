@@ -1,4 +1,4 @@
-import { statSync } from 'fs';
+import { readFileSync, statSync } from 'fs';
 import { join } from 'path';
 
 import readdir from 'recursive-readdir';
@@ -11,11 +11,17 @@ const dataDir = join(__dirname, 'general');
 test('createGeneralTOC', async () => {
   await createGeneralTOC(__dirname, { dataDir });
 
-  const files = (await readdir(dataDir)).sort();
-  const sizes = files
+  const files = (await readdir(dataDir)).sort()
     .filter((file) => file.match(/\.json$/))
+
+  const sizes = files
     .map((file) => {
       return statSync(file).size;
     });
-  expect(sizes).toStrictEqual([1656, 707, 1002, 483, 250]);
+  expect(sizes).toStrictEqual([1656,
+    832,
+    1127,
+    96,
+    487,
+    250,]);
 });
