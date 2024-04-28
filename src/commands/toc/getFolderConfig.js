@@ -15,9 +15,9 @@ export function getFolderConfig(folder) {
   loadSettings(folderConfig, folder);
   loadSettings(defaultFolderConfig, folder);
 
-
   return {
-    folderConfig: { ...defaultFolderConfig, ...folderConfig }, defaultFolderConfig
+    folderConfig: { ...defaultFolderConfig, ...folderConfig },
+    defaultFolderConfig,
   };
 }
 
@@ -25,9 +25,7 @@ function loadSettings(config, folder) {
   if (config.settingsFilename) {
     const settingsFilename = join(folder, config.settingsFilename);
     if (existsSync(settingsFilename)) {
-      config.settings = JSON.parse(
-        readFileSync(settingsFilename, 'utf8'),
-      );
+      config.settings = JSON.parse(readFileSync(settingsFilename, 'utf8'));
     }
   }
 }

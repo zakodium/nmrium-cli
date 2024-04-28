@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-expressions */
+import { join } from 'path';
+
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
@@ -107,13 +109,11 @@ yargs(hideBin(normalizeArgv(process.argv)))
 
   .demandCommand().argv;
 
-function normalizeArgv(argv) {
-
+function normalizeArgv(argv = {}) {
   if (argv.dataDir) {
-    if (!dataDir.startsWith('/')) {
+    if (!argv.dataDir.startsWith('/')) {
       argv.dataDir = join(homeDir, argv.dataDir);
     }
   }
-  return argv
-
+  return argv;
 }

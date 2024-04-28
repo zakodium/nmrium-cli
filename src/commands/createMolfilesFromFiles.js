@@ -21,11 +21,14 @@ const { Molecule } = OCL;
 export async function createMolfilesFromFiles(commandDir, options = {}) {
   const { dataDir = commandDir } = options;
 
-  const folders = readdirSync(dataDir, { withFileTypes: true, recursive: true })
-    .filter((entity) => entity.isDirectory())
-    .map((entity) => join(entity.path, entity.name))
-    .filter((name) => !name.match(/\/\d\d$/))
-    .filter((name) => !name.match(/\/\./));
+  const folders = [
+    dataDir,
+    ...readdirSync(dataDir, { withFileTypes: true, recursive: true })
+      .filter((entity) => entity.isDirectory())
+      .map((entity) => join(entity.path, entity.name))
+      .filter((name) => !name.match(/\/\d\d$/))
+      .filter((name) => !name.match(/\/\./)),
+  ];
 
   for (let folder of folders) {
     if (existsSync(join(folder, '01'))) {
@@ -80,7 +83,6 @@ function getFileWithExtension(folder, extension) {
 
 function fromSmilesFile(folder) {
   // we search for the file that contains the smiles. It should end with .txt
-
   const file = getFileWithExtension(folder, '.txt');
   if (!file) return;
 

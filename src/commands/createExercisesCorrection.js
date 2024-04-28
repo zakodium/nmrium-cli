@@ -4,11 +4,7 @@ import { join } from 'path';
 import debugFct from 'debug';
 import OCL from 'openchemlib';
 
-
-
 const debug = debugFct('nmrium.createExercisesCorrection');
-
-
 
 const { Molecule } = OCL;
 /**
@@ -19,7 +15,7 @@ const { Molecule } = OCL;
  */
 export async function createExercisesCorrection(commandDir, options = {}) {
   const { dataDir = commandDir } = options;
-  debug(`Creating correction of: ${dataDir}`)
+  debug(`Creating correction of: ${dataDir}`);
 
   const correctionDir = join(dataDir, 'correction');
   mkdirSync(correctionDir, { recursive: true });
