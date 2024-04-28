@@ -12,7 +12,7 @@ import { deleteStructures } from './commands/deleteStructures.js';
 import { predictSpectra } from './commands/predictSpectra.js';
 
 const homeDir = process.cwd();
-yargs(hideBin(process.argv))
+yargs(hideBin(normalizeArgv(process.argv)))
   .scriptName('nmrium')
   .command('createExercisesTOC [options]', 'Build toc.json for exercises', {
     builder: (yargs) => {
@@ -106,3 +106,14 @@ yargs(hideBin(process.argv))
   })
 
   .demandCommand().argv;
+
+function normalizeArgv(argv) {
+
+  if (argv.dataDir) {
+    if (!dataDir.startsWith('/')) {
+      argv.dataDir = join(homeDir, argv.dataDir);
+    }
+  }
+  return argv
+
+}
