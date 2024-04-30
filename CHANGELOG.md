@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.14.0](https://github.com/zakodium/nmrium-cli/compare/v0.13.0...v0.14.0) (2024-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename keepIdCode to appendIDCode and add appendNoStereoIDCodeHash and appendRacemateIDCodeHash
+
+### release-as
+
+* v0.14.0 ([21ee715](https://github.com/zakodium/nmrium-cli/commit/21ee7157c9595cd1a2d4d538f6e5152fefc05e9f))
+
+
+### Features
+
+* rename keepIdCode to appendIDCode and add appendNoStereoIDCodeHash and appendRacemateIDCodeHash ([bdb39ea](https://github.com/zakodium/nmrium-cli/commit/bdb39ea74948a3778730f748377c46823eb50c37))
+
 ## [0.13.0](https://github.com/zakodium/nmrium-cli/compare/v0.12.0...v0.13.0) (2024-04-28)
 
 
