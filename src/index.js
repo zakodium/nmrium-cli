@@ -18,11 +18,31 @@ yargs(hideBin(normalizeArgv(process.argv)))
   .scriptName('nmrium')
   .command('createExercisesTOC [options]', 'Build toc.json for exercises', {
     builder: (yargs) => {
-      return yargs.option('keepIdCode', {
-        alias: 'i',
-        type: 'boolean',
-        description: 'Add idCode in the exercise TOC',
-      });
+      return yargs
+        .option('appendIDCode', {
+          alias: 'i',
+          type: 'boolean',
+          default: false,
+          description: 'Add idCode in the exercise TOC',
+        })
+        .option('appendNoStereoIDCodeHash', {
+          alias: 's',
+          type: 'boolean',
+          default: false,
+          description:
+            'Add an idCode hash without stereo information in order to consider as correct the molecule with wrong stereo information',
+        })
+        .option('appendRacemateIDCodeHash', {
+          type: 'boolean',
+          default: true,
+          description:
+            'Allows to check the answer considering any enantiomer as correct',
+        })
+        .option('cleanJCAMP', {
+          type: 'boolean',
+          default: false,
+          description: 'Only keep the first spectrum in the JCAMP-DX file',
+        });
     },
     handler: (argv) => {
       createExercisesTOC(homeDir, { ...argv });

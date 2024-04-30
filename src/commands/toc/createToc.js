@@ -14,7 +14,7 @@ const debug = debugFct('nmrium.toc');
  * @param {string} commandDir
  * @param {object} [options={}]
  * @param {string} [options.dataDir=commandDir]
- * @param {boolean} [options.keepIdCode=false] - Add the idCode to the toc
+ * @param {boolean} [options.appendIDCode=false] - Add the idCode to the toc
  */
 export async function createToc(commandDir, folderProcessor, options = {}) {
   const { dataDir = commandDir } = options;

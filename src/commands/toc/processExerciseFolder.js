@@ -6,6 +6,7 @@ import { hashElement } from 'folder-hash';
 import { createTree } from 'jcampconverter';
 import md5 from 'md5';
 import OCL from 'openchemlib';
+import { makeRacemic } from 'openchemlib-utils';
 
 const { Molecule } = OCL;
 
@@ -21,7 +22,9 @@ let exercise = 0;
  * @param {object} toc
  * @param {object} [options={}]
  * @param {string} [options.spectraFilter] - comma separated list of experiments to process, if not defined all experiments are processed
- * @param {string} [options.keepIdCode=false] - Keep idCode in the toc
+ * @param {string} [options.appendIDCode=false] - Append idCode in the toc
+ * @param {string} [options.appendNoStereoIDCodeHash=false] - Append noStereo idCode hash to check
+ * @param {string} [options.appendRacemateIDCodeHash=true] - Append racemate idCode hash to check
  * @param {boolean} [options.cleanJCAMP] - keep only the spectrum in the JCAMP-DX
  */
 
@@ -31,13 +34,20 @@ export async function processExerciseFolder(
   toc,
   options = {},
 ) {
-  let { spectraFilter, keepIdCode = false, cleanJCAMP = false } = options;
+  let {
+    spectraFilter,
+    appendIDCode = false,
+    cleanJCAMP = false,
+    appendNoStereoIDCodeHash = false,
+    appendRacemateIDCodeHash = true,
+  } = options;
   if (spectraFilter) {
     spectraFilter = new RegExp(
       `^(${spectraFilter.split(',').join('|')}).`,
       'i',
     );
   }
+
   const currentFolder = join(basename, folder);
   const entries = readdirSync(currentFolder);
   const molfileName = readdirSync(currentFolder).filter((file) =>
@@ -51,6 +61,7 @@ export async function processExerciseFolder(
   const mf = molecule.getMolecularFormula().formula;
   const idCode = molecule.getIDCode();
   const idCodeHash = md5(idCode);
+
   const includedFiles = []; // we only hash the included files to find out if it is the same exercise
   for (let spectrumName of entries.filter(
     (file) =>
@@ -95,11 +106,29 @@ export async function processExerciseFolder(
     id,
     mf,
     idCodeHash,
-    idCode: keepIdCode ? idCode : undefined,
     file: `${URL_FOLDER}/${folder}/index.json`,
     title,
     selected: exercise === 1 || undefined,
   };
+  if (appendIDCode) {
+    tocEntry.idCode = idCode;
+  }
+
+  if (appendNoStereoIDCodeHash || appendRacemateIDCodeHash) {
+    const { noStereoIDCodeHash, racemateIDCodeHash } = getStereoHash(molecule);
+    if (
+      appendNoStereoIDCodeHash &&
+      tocEntry.idCodeHash !== noStereoIDCodeHash
+    ) {
+      tocEntry.noStereoIDCodeHash = noStereoIDCodeHash;
+    }
+    if (
+      appendRacemateIDCodeHash &&
+      tocEntry.idCodeHash !== racemateIDCodeHash
+    ) {
+      tocEntry.racemateIDCodeHash = racemateIDCodeHash;
+    }
+  }
   toc.push(tocEntry);
 }
 
@@ -142,4 +171,23 @@ function flattenTree(entries, flatten) {
     }
     flatten.push(entry);
   }
+}
+
+/**
+ * get the hash without stereo information or racemate
+ *
+ * @param {import('openchemlib').Molecule} molecule
+ * @returns
+ */
+function getStereoHash(molecule) {
+  const moleculeNoStereo = molecule.getCompactCopy();
+  moleculeNoStereo.stripStereoInformation();
+  const noStereoIDCode = moleculeNoStereo.getIDCode();
+  const noStereoIDCodeHash = md5(noStereoIDCode);
+
+  const moleculeRacemate = molecule.getCompactCopy();
+  makeRacemic(moleculeRacemate);
+  const racemateIDCode = moleculeRacemate.getIDCode();
+  const racemateIDCodeHash = md5(racemateIDCode);
+  return { noStereoIDCodeHash, racemateIDCodeHash };
 }

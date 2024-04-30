@@ -1,11 +1,20 @@
 [
   {
+    "id": "XjKWTz7MPgN2x3evAUQWsjpoXNE=",
+    "mf": "C5H12O2",
+    "idCodeHash": "3d95df75d24a4142629d4a1258458cfb",
+    "file": "./Chiral/index.json",
+    "title": "Chiral",
+    "noStereoIDCodeHash": "21244f700a4490ed7d963ae780723fd6",
+    "racemateIDCodeHash": "ad594ab988e3bfd5e52f0ab5ffe4e59c",
+    "selected": true
+  },
+  {
     "id": "8x+bblgo31zA/Y8aAYQHBwjFaZg=",
     "mf": "C9H18",
     "idCodeHash": "7ec5fb4efcce0c89de85193a330e6679",
     "file": "./Exercises3/index.json",
-    "title": "Exercises3",
-    "selected": true
+    "title": "Exercises3"
   },
   {
     "groupName": "Series1",
