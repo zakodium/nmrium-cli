@@ -1,10 +1,10 @@
 import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+import init from '@zakodium/nmrium-core-plugins';
 import debugFct from 'debug';
 import { hashElement } from 'folder-hash';
 import { createTree } from 'jcampconverter';
-import { migrate } from 'nmr-load-save';
 
 import { getFolderConfig } from './getFolderConfig.js';
 
@@ -83,8 +83,8 @@ async function loadData(currentFolder, options = {}) {
 
     spectra.push(spectrum);
   }
-
-  const nmrium = migrate({ spectra, molecules });
+  const core = init();
+  const nmrium = core.migrate({ spectra, molecules });
   if (options.settings) {
     nmrium.settings = options.settings;
   }

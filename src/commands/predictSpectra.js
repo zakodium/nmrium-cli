@@ -2,7 +2,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import { spectrum1DToJcamp } from 'nmr-load-save';
+import { spectrum1DToJCAMPDX } from '@zakodium/nmrium-core-plugins';
 import { predictSpectra as predictor } from 'nmr-processing';
 import OCL from 'openchemlib';
 import { nbLabileH } from 'openchemlib-utils';
@@ -55,7 +55,7 @@ export async function predictSpectra(commandDir, options = {}) {
         },
       },
     });
-    const jcamp = spectrum1DToJcamp(spectra.spectra[0]);
+    const jcamp = spectrum1DToJCAMPDX(spectra.spectra[0]);
     writeFileSync(outputFilename, jcamp, 'utf8');
   }
 }

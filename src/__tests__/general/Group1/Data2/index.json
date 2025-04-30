@@ -1,4 +1,43 @@
 {
+  "version": 9,
+  "plugins": {
+    "@zakodium/nmrium-core-plugins#NMReDATALoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#NMReDATALoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#VarianLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#VarianLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#BrukerLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#BrukerLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#JCAMPDXLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#JCAMPDXLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#MolfileLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#MolfileLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#SDFLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#SDFLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#SMILESLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#SMILESLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#JEOLLoaderPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#JEOLLoaderPlugin",
+      "version": 1
+    },
+    "@zakodium/nmrium-core-plugins#AutoPostProcessingPlugin": {
+      "id": "@zakodium/nmrium-core-plugins#AutoPostProcessingPlugin",
+      "version": 1
+    }
+  },
   "data": {
     "spectra": [
       {
@@ -44,7 +83,6 @@
       ]
     }
   },
-  "version": 6,
   "settings": {
     "display": {
       "general": {
