@@ -41,6 +41,8 @@
     "nmrium": "bin/nmrium.js"
   },
   "dependencies": {
+    "@zakodium/nmrium-core": "^0.1.0",
+    "@zakodium/nmrium-core-plugins": "^0.1.1",
     "convert-to-jcamp": "^5.4.10",
     "debug": "^4.3.4",
     "fifo-logger": "^1.0.0",
@@ -50,9 +52,9 @@
     "git-url-parse": "^14.0.0",
     "jcampconverter": "^9.6.1",
     "md5": "^2.3.0",
-    "nmr-load-save": "^0.29.2",
-    "nmr-processing": "^12.2.0",
-    "openchemlib": "^8.9.0",
+    "nmr-processing": "^18.0.1",
+    "openchemlib": "^9.0.1",
+    "openchemlib-utils": "^8.1.0",
     "recursive-iterator": "^3.3.0",
     "sdf-parser": "^6.0.1",
     "traverse": "^0.6.8",
